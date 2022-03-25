@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="triggerDelayKey" type="id"/>
+    <item name="triggerLastTimeKey" type="id"/>
+
+    <item name="multiClickFrequency" type="id"/>
+    <item name="multiClickLastTime" type="id"/>
+
+    <item name="tobBarRightSearch" type="id"/>
+    <item name="articlePageLeftBack" type="id"></item>
+    <item name="articlePageRightBrowser" type="id"></item>
+
+    <item name="input_phone_number_edittext" type="id"></item>
+
+    <!--  点击事件id  -->
+    <item name="singleClickId" type="id"></item>
+</resources>

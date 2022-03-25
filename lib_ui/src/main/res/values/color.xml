@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#07C160</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="color_transparent">#00000000</color>
+
+    <!--  APP 主题色  -->
+    <color name="app_color">#2196F3</color>
+    <color name="app_color_10">#102196F3</color>
+    <color name="app_color_20">#202196F3</color>
+    <color name="app_color_30">#302196F3</color>
+    <color name="app_color_40">#402196F3</color>
+    <color name="app_color_50">#502196F3</color>
+    <color name="app_color_60">#602196F3</color>
+    <color name="app_color_70">#702196F3</color>
+    <color name="app_color_80">#802196F3</color>
+    <color name="app_color_90">#902196F3</color>
+    <!--  系统背景色  -->
+    <color name="app_system_color">#F4F4F4</color>
+    <!--  白色  -->
+    <color name="white">#ffffff</color>
+    <color name="white_10">#ffffff</color>
+    <color name="white_20">#20ffffff</color>
+    <color name="white_30">#30ffffff</color>
+    <color name="white_40">#40ffffff</color>
+    <color name="white_50">#50ffffff</color>
+    <color name="white_60">#60ffffff</color>
+    <color name="white_70">#70ffffff</color>
+    <color name="white_80">#80ffffff</color>
+    <color name="white_90">#90ffffff</color>
+    <!--  黑色  -->
+    <color name="black">#000000</color>
+    <color name="black_10">#10000000</color>
+    <color name="black_20">#20000000</color>
+    <color name="black_30">#30000000</color>
+    <color name="black_40">#40000000</color>
+    <color name="black_50">#50000000</color>
+    <color name="black_60">#60000000</color>
+    <color name="black_70">#70000000</color>
+    <color name="black_80">#80000000</color>
+    <color name="black_90">#90000000</color>
+
+    <color name="color_666">#666666</color>
+    <color name="color_606060">#606060</color>
+    <color name="color_666_10">#10666666</color>
+    <color name="color_666_20">#20666666</color>
+    <color name="color_666_30">#30666666</color>
+    <color name="color_666_40">#40666666</color>
+    <color name="color_666_50">#50666666</color>
+    <color name="color_666_60">#60666666</color>
+    <color name="color_666_70">#70666666</color>
+    <color name="color_666_80">#80666666</color>
+    <color name="color_666_90">#90666666</color>
+
+
+    <color name="color_ccc">#CCCCCC</color>
+    <color name="color_ddd">#DDDDDD</color>
+
+    <color name="color_202020">#202020</color>
+    <color name="color_eee">#EEEEEE</color>
+
+    <color name="color_e5">#E5E5E5</color>
+    <color name="color_f5">#F5F5F5</color>
+    <color name="color_757575">#757575</color>
+    <color name="color_f8">#F8F8F8</color>
+    <color name="color_f7">#F7F7F7</color>
+    <color name="color_f7_90">#90F7F7F7</color>
+    <color name="color_fa">#FaFaFa</color>
+    <color name="color_999">#999999</color>
+    <color name="color_333">#333333</color>
+
+    <color name="color_363636">#363636</color>
+</resources>

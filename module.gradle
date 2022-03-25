@@ -1,0 +1,11 @@
+if (!singleModule.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+apply from:'../dependencies.gradle'
+
+
+dependencies {
+    implementation project(path: ':lib_base')
+}

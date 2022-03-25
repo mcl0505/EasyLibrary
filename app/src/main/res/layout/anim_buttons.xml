@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@mipmap/icon_btn_add"
+        android:layout_marginBottom="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnBlood"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginRight="25dp"
+        android:visibility="invisible"
+        android:background="@mipmap/icon_btn_blood"
+        android:layout_toLeftOf="@id/btnAdd"
+        android:layout_alignTop="@id/btnAdd"/>
+
+    <Button
+        android:id="@+id/btnFan"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="25dp"
+        android:visibility="invisible"
+        android:background="@mipmap/icon_btn_fan"
+        android:layout_alignTop="@id/btnAdd"
+        android:layout_toRightOf="@id/btnAdd"/>
+
+    <Button
+        android:id="@+id/btnZhen"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:visibility="invisible"
+        android:background="@mipmap/icon_btn_zhen"
+        android:layout_toLeftOf="@id/btnAdd"
+        android:layout_above="@id/btnBlood"
+        android:layout_marginBottom="8dp"
+        />
+
+    <Button
+        android:id="@+id/btnYao"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_toRightOf="@id/btnAdd"
+        android:layout_above="@id/btnFan"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@id/btnFan"
+        app:layout_constraintBottom_toBottomOf="@id/btnZhen"
+        android:background="@mipmap/icon_btn_yao"/>
+
+
+</RelativeLayout>

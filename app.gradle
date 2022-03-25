@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+apply from:'../dependencies.gradle'
+
+android {
+
+    defaultConfig {
+        applicationId rootProject.ext.defaultVersion.applicationId
+    }
+
+    signingConfigs {
+        release {
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+            storeFile file(KEY_PATH)
+            storePassword KAY_PASS
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':lib_base')
+    implementation "com.ogaclejapan.arclayout:library:1.1.0@aar"
+}

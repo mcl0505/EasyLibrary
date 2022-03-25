@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--静态使用-->
+    <string-array name="imgArray">
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210913/60fc674f277ea2d23d4c4ea4a84f4463.jpeg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210917/0b07f614f05c7bb80877a0d45d257693.jpg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210916/a44073849dad85d29bd3e4380df93710.jpg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210913/831759af01cdc957cf24024eba10e2b2.jpg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20211029/080255e04f9b0b81acf4d4cedae6a92e.jpg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20211029/1a0227accf65f9c50bc05be886820a4b.jpeg</item>
+        <item>https://app.yangguangyy.com/upload/20210826/589c585b3b1e80cb88f224fa00076eb0.jpg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210913/009c451121123677ec8afc92f8d73e17.jpeg</item>
+        <item>http://ygyy-kunchuang.oss-cn-beijing.aliyuncs.com/upload/20210902%5C99704f0f31f4e5264660c540f0d5ee50.jpg</item>
+    </string-array>
+
+    <string-array name="arrayAlarmLevel">
+        <item>全部</item>
+        <item>重要报警</item>
+        <item>普通报警</item>
+    </string-array>
+
+    <string-array name="arrayAlarmType">
+        <item>全部</item>
+        <item>血糖报警</item>
+        <item>设备报警</item>
+    </string-array>
+
+    <string-array name="arraySugar">
+        <item>CGM设备</item>
+        <item>BGM记录</item>
+    </string-array>
+
+    <string-array name="eatStatusArray">
+
+        <item>早餐前</item>
+        <item>早餐后</item>
+        <item>午餐前</item>
+        <item>午餐后</item>
+        <item>晚餐前</item>
+        <item>晚餐后</item>
+        <item>睡前</item>
+        <item>凌晨</item>
+    </string-array>
+</resources>

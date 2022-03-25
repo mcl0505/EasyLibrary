@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.easy.lib_ui">
+    <!--  相机  -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--  内存  写入权限  -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--  内存  读取权限  -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--  请求安装apk权限  -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+
+    <application>
+
+        <!--    App更新弹框    -->
+        <activity
+            android:name=".update.UpdateAppActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/DialogActivityTheme" />
+        <!--    图片预览    -->
+        <activity android:name=".ui.PreviewImageActivity" />
+        <!--    App 更新服务    -->
+        <service android:name=".update.UpdateAppService" />
+
+        <provider
+            android:name=".update.UpdateFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_file_paths" />
+        </provider>
+    </application>
+</manifest>

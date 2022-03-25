@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">@color/app_color</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!--  背景色  -->
+    <color name="app_bg">#F6FBFE</color>
+
+    <!--  重要通知背景  -->
+    <color name="color_FFF1EC">#FFF1EC</color>
+    <!--  重要通知 线条颜色  -->
+    <color name="color_FF6232">#FF6232</color>
+    <!--  普通通知背景  -->
+    <color name="color_FFFAF1">#FFFAF1</color>
+    <!--  普通通知 线条颜色  -->
+    <color name="color_F0B826">#F0B826</color>
+    <!--  护士站颜色  -->
+    <color name="color_21A41F">#21A41F</color>
+    <!--  床位颜色  -->
+    <color name="color_FF7B7B">#FF7B7B</color>
+
+    <!--  今日血糖  校准值  -->
+    <color name="color_line_2196f3">#2196F3</color>
+    <!--  今日血糖  测量值  -->
+    <color name="color_line_21E5B7">#21E5B7</color>
+
+    <color name="color_point_sugar">#E03521</color>
+    <color name="color_point_yao">#36DDB5</color>
+    <color name="color_point_fan">#41CCFF</color>
+    <color name="color_point_zheng">#FC9201</color>
+
+    <!--  每日波动  正常  -->
+    <color name="color_30CE49">#30CE49</color>
+    <!--  每日波动  不正常  -->
+    <color name="color_FFA41D">#FFA41D</color>
+
+    <!--  血糖  非常低  -->
+    <color name="color_8C2D1F">#8C2D1F</color>
+    <!--  血糖  低血糖  -->
+    <color name="color_E44833">#E44833</color>
+    <!--  血糖  正常  -->
+    <color name="color_4DCC71">#4DCC71</color>
+    <!--  血糖  高血糖  -->
+    <color name="color_FDF151">#FDF151</color>
+    <!--  血糖  非常高  -->
+    <color name="color_FFC769">#FFC769</color>
+    <color name="color_FD902C">#FD902C</color>
+
+    <color name="color_1AFFC9">#1AFFC9</color>
+    <color name="color_DB3DDD">#DB3DDD</color>
+    <color name="color_0CCF39">#0CCF39</color>
+    <color name="color_FF9C00">#FF9C00</color>
+    <color name="color_FFD912">#FFD912</color>
+    <color name="color_FE0000">#FE0000</color>
+
+
+    <color name="date_picker_bg">#FFFFFF</color>
+    <color name="date_picker_divider">#11112233</color>
+    <color name="date_picker_text_light">#000000</color>
+    <color name="date_picker_text_dark">#333333</color>
+
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hhqc.easylibrary">
+
+    <!-- 网络请求权限 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--允许开发nfc的权限-->
+    <uses-permission android:name="android.permission.NFC"/>
+    <!--声明只有带有nfc功能的手机才能下载你在google市场发布的具有NFC功能的app-->
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+<!--  手机震动  -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:name="com.hhqc.easylibrary.app.App"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".app.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,34 @@
+//版本信息控制文件
+ext {
+    /**
+     * 项目相关的版本信息
+     */
+    defaultVersion = [
+            applicationId    : "com.hhqc.easylibrary", //包名，根据项目修改
+            compileSdkVersion: 31,                  //编译SDK的版本
+            buildToolsVersion: "30.0.2",            //构建工作的SDK版本号
+            minSdkVersion    : 23,                  //最低支持的Android版本
+            targetSdkVersion : 31,                  //默认适配的版本
+            versionCode      : 1,                   //APK版本号  依次递增
+            versionName      : "v 1.0.6"              //版本名称    APK版本更新可修改
+    ]
+
+
+    /**
+     * 第三方信息版本号
+     */
+    depVersion = [
+            lifecycle           : "2.1.0-alpha02",
+            roomVersion         : "2.2.5",
+            archLifecycleVersion: "2.2.0",
+            coreTestingVersion  : "2.1.0",
+            materialVersion     : "1.1.0",  //Design 库
+            coroutines          : "1.3.1",
+            koinVersion         : "2.0.1",
+            ankoVersion         : "0.10.8",
+            okhttpVersion       : "3.14.9",
+            retrofitVersion     : "2.9.0",
+            navigationVersion   : "2.3.4",
+            multidexVs          : "2.0.1",//方法数超出最大限制解决方案
+    ]
+}

@@ -1,0 +1,21 @@
+# *.iml 文件为Android Studio / Intellij IDEA 为每一个module 生成的配置文件
+*.iml
+# gradle 运行以后生成的缓存文件夹
+.gradle
+/local.properties
+# .idea 是android studio / Intellij IDEA 工程打开以后生成的工作环境配置文件夹。
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+# build 文件夹为编译时的缓存文件夹，每次运行时都会生成，同时你在运行了gradle clean 的任务以后它会被删除清理掉。
+/build
+/captures
+.externalNativeBuild
+.cxx
+# local.properties 中配置个人电脑环境中的配置，这不能提供给别人使用
+local.properties
+

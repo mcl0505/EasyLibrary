@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.easy.lib_ui.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_title_tv_center_color="@color/white"
+        app:bar_titie_tv_left_icon="@mipmap/icon_title_back_white"
+        app:bar_title_color="@color/app_color"
+        />
+
+    <com.easy.lib_ui.ui.MultiStateView
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_system_color"/>
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".app.MainActivity"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加数据"/>
+
+        <Button
+            android:id="@+id/deleteData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="删除数据"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_main"/>
+
+        <com.easy.lib_ui.ui.MultiStateView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+</layout>

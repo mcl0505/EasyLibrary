@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:context=".home.activity.PreviewImageActivity">
+
+        <com.youth.banner.Banner
+            android:id="@+id/mBanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:banner_auto_loop="false"
+            app:banner_indicator_normal_color="@color/color_999"
+            app:banner_indicator_selected_color="@color/app_color"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

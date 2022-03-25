@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  自定义标题栏  -->
+    <declare-styleable name="TitleBar">
+        <attr name="bar_title_color" format="color" />
+        <attr name="bar_title_tv_center" format="string" />
+        <attr name="bar_titie_tv_right" format="string" />
+        <attr name="bar_titie_tv_right_icon" format="reference" />
+        <attr name="bar_titie_tv_left" format="string" />
+        <attr name="bar_titie_tv_left_icon" format="reference" />
+        <attr name="bar_title_tv_center_color" format="color" />
+        <attr name="bar_title_tv_right_color" format="color" />
+        <attr name="bar_title_tv_left_color" format="color" />
+    </declare-styleable>
+
+    <!--  底部标签  -->
+    <declare-styleable name="TabButton">
+        <!--    选中图片    -->
+        <attr name="tbn_selected_icon" format="reference" />
+        <!--     未选中图标   -->
+        <attr name="tbn_unselected_icon" format="reference" />
+        <!--     提示文字   -->
+        <attr name="tbn_tip" format="string" />
+        <!--    图片大小    -->
+        <attr name="tbn_icon_size" format="dimension" />
+        <!--    文字大小    -->
+        <attr name="tbn_text_size" format="dimension" />
+        <!--    文字颜色   默认    -->
+        <attr name="tbn_text_color" format="color" />
+        <!--    文字颜色    选中    -->
+        <attr name="tbn_text_select_color" format="color" />
+        <!--    是否选中    -->
+        <attr name="tbn_checked" format="boolean" />
+    </declare-styleable>
+
+    <!--  圆角TextView  -->
+    <declare-styleable name="RadiusTextView">
+        <attr name="rv_backgroundColor" format="reference|color" />
+        <attr name="rv_radius" format="dimension|reference" />
+        <attr name="rv_strokeWidth" format="dimension|reference" />
+        <attr name="rv_strokeColor" format="reference|color" />
+        <attr name="rv_strokePressedColor" format="reference|color" />
+        <attr name="rv_strokeEnabledColor" format="reference|color" />
+        <attr name="rv_radiusHalfHeightEnable" format="boolean" />
+        <attr name="rv_widthHeightEqualEnable" format="boolean" />
+        <attr name="rv_topLeftRadius" format="dimension|reference" />
+        <attr name="rv_topRightRadius" format="dimension|reference" />
+        <attr name="rv_bottomLeftRadius" format="dimension|reference" />
+        <attr name="rv_bottomRightRadius" format="dimension|reference" />
+        <attr name="rv_rippleEnable" format="boolean" />
+    </declare-styleable>
+
+    <!--  标签 样式  -->
+    <declare-styleable name="labels_view">
+        <attr name="selectType" format="enum">
+            <enum name="NONE" value="1" />
+            <enum name="SINGLE" value="2" />
+            <enum name="SINGLE_IRREVOCABLY" value="3" />
+            <enum name="MULTI" value="4" />
+        </attr>
+
+        <attr name="labelGravity">
+            <!-- Push object to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30" />
+            <!-- Push object to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50" />
+            <!-- Push object to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03" />
+            <!-- Push object to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05" />
+            <!-- Place object in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10" />
+            <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70" />
+            <!-- Place object in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01" />
+            <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+            <flag name="fill_horizontal" value="0x07" />
+            <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11" />
+            <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill" value="0x77" />
+            <!-- Additional option that can be set to have the top and/or bottom edges of
+                 the child clipped to its container's bounds.
+                 The clip will be based on the vertical gravity: a top gravity will clip the bottom
+                 edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+            <flag name="clip_vertical" value="0x80" />
+            <!-- Additional option that can be set to have the left and/or right edges of
+                 the child clipped to its container's bounds.
+                 The clip will be based on the horizontal gravity: a left gravity will clip the right
+                 edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+            <flag name="clip_horizontal" value="0x08" />
+            <!-- Push object to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003" />
+            <!-- Push object to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005" />
+        </attr>
+
+        <attr name="maxSelect" format="integer" />
+        <attr name="minSelect" format="integer" />
+        <attr name="maxLines" format="integer" />
+        <attr name="isIndicator" format="boolean" />
+        <attr name="labelTextColor" format="reference|color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelTextWidth" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="labelTextHeight" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="labelTextPadding" format="dimension" />
+        <attr name="labelTextPaddingLeft" format="dimension" />
+        <attr name="labelTextPaddingTop" format="dimension" />
+        <attr name="labelTextPaddingRight" format="dimension" />
+        <attr name="labelTextPaddingBottom" format="dimension" />
+        <attr name="lineMargin" format="dimension" />
+        <attr name="wordMargin" format="dimension" />
+        <attr name="labelBackground" format="reference|color" />
+        <attr name="singleLine" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RedSpot">
+        <attr name="rs_text" format="string" />
+        <attr name="rs_textSize" format="integer" />
+        <attr name="rs_textColor" format="color" />
+        <attr name="rs_backgroundColor" format="color" />
+    </declare-styleable>
+
+    <!--评分控件-->
+    <declare-styleable name="RatingStarView">
+        <!--    每个控件之间的距离    -->
+        <attr name="rsv_starMargin" format="integer|dimension" />
+        <attr name="rsv_cornerRadius" format="float|dimension" />
+        <!--    前景色    -->
+        <attr name="rsv_starForegroundColor" format="color|reference" />
+        <!--    背景色    -->
+        <attr name="rsv_starBackgroundColor" format="color|reference" />
+        <!--    边框颜色    -->
+        <attr name="rsv_strokeColor" format="color|reference" />
+        <!--    边框宽度    -->
+        <attr name="rsv_strokeWidth" format="float|dimension" />
+        <!--    控件数量   -->
+        <attr name="rsv_starNum" format="integer" />
+        <!--    起始选中数量    -->
+        <attr name="rsv_rating" format="float" />
+        <attr name="rsv_starThickness" format="float|fraction" />
+        <attr name="rsv_drawStrokeForEmptyStar" format="boolean" />
+        <attr name="rsv_drawStrokeForFullStar" format="boolean" />
+        <attr name="rsv_drawStrokeForHalfStar" format="boolean" />
+        <!--    是否可以点击    -->
+        <attr name="rsv_enableSelectRating" format="boolean" />
+        <attr name="rsv_onlyHalfStar" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ScaleLinearLayout">
+        <attr name="mll_height_percent" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="ScaleRelativeLayout">
+        <attr name="mrl_height_percent" format="float"/>
+    </declare-styleable>
+
+    <!--这是多类型页面-->
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference" />
+        <attr name="msv_successView" format="reference" />
+        <attr name="msv_unknownView" format="reference" />
+        <attr name="msv_netErrorView" format="reference" />
+        <attr name="msv_emptyView" format="reference" />
+        <attr name="msv_emptyViewImage" format="reference" />
+        <attr name="msv_emptyViewText" format="reference|string" />
+    </declare-styleable>
+</resources>

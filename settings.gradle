@@ -1,0 +1,13 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        jcenter() { url 'https://maven.aliyun.com/repository/public' }
+        maven { url "https://jitpack.io" }
+    }
+}
+rootProject.name = "EasyLibrary"
+include ':app'
+include ':lib_base'
+include ':lib_ui'
+include ':lib_util'

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  App 启动专属主题  -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        App Bar 的背景色-->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <!--        status bar（状态栏）背景色-->
+        <item name="colorPrimaryDark">@color/color_transparent</item>
+        <!--        控件在选中状态或获取焦点状态下使用这个颜色-->
+        <item name="colorAccent">@color/app_color</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!--        文本颜色-->
+        <!--        <item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+        <!--        默认工具样式-->
+        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
+    </style>
+    <!--  消除ToolBar左侧的距离  -->
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+</resources>

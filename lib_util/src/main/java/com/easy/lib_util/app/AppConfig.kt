@@ -21,9 +21,9 @@ object AppConfig {
         //是否使用Glide 加载图片
         var imgLoad:ImageLoad = ImageLoad.GLIDE
         //加载失败显示占位图
-        var errorRes: Int = R.drawable.ic_android
+        var errorRes: Int = R.drawable.utils_image_placehoder
         //加载之前占位图
-        var placeholderRes: Int = R.drawable.ic_loading
+        var placeholderRes: Int = R.drawable.utils_image_placehoder
     }
 
     object StartAndFinish {

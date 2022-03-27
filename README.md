@@ -12,7 +12,7 @@
 ### Fragment
 
     所有的Fragment 都继承与 EasyFragment 
-    BaseNoViewModelFragment:页面过于简单,不需要网络交互  可以不使用Vi  ewModel   可使用定义的模板创建,ViewModel不勾选
+    BaseNoViewModelFragment:页面过于简单,不需要网络交互  可以不使用ViewModel   可使用定义的模板创建,ViewModel不勾选
     BaseFragment : 普通页面,有网络交互的情况 使用ViewModel     可使用定义的模板创建,ViewModel勾选(默认)
     BaseRefreshFragment:里面封装了刷新相关逻辑与Adapter 仅支持单item 可使用定义的模板创建,ViewModel勾选(默认)  勾选刷新
 

@@ -51,6 +51,20 @@ object FileUtil {
             }
             return path
         }
+    // 取得App的log目录：/sdcard/包名/Log，没有sd卡则是/data/data/包名/files/Image
+    val appImageDir: String
+        get() {
+            val s = "/Image/"
+            val path = if (isSDCardMounted)
+                cacheDir.absolutePath + s
+            else
+                EasyApplication.instance.filesDir.absolutePath + s
+            val file = File(path)
+            if (!file.exists()) {
+                file.mkdirs()
+            }
+            return path
+        }
 
     // 判断SD卡是否被挂载
     // return Environment.getExternalStorageState().equals("mounted");

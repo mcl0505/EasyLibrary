@@ -1,7 +1,8 @@
-package com.easy.lib_ui.dialog
+package com.easy.lib_ui.dialog.image
 
 import com.easy.lib_ui.R
 import com.easy.lib_util.ext.getColor
+import com.luck.picture.lib.config.SelectMimeType
 
 /**
  *   公司名称: ~漫漫人生路~总得错几步~
@@ -23,23 +24,12 @@ data class SelectImageConfig(
     )
 
     data class PictureConfig(
-        var chooseType: PictureType = PictureType.TYPE_IMAGE,
+        var chooseType: Int = SelectMimeType.ofImage(),//ofVideo()  ofAll ofAudio
         var maxSelectNumber: Int = 1,//最大选择数量
         var isPreview: Boolean = true,//是否开启预览
         var isCrop: Boolean = true,  //是否开启裁剪  maxSelectNumber>1 则自动为 false
-        var isCircleCrop: Boolean = true,  //圆形剪裁
-        var isCropEnabled: Boolean = !isCircleCrop,  //裁剪框是否可拖拽  圆形裁剪建议去除
-        var isCropFrame: Boolean = !isCircleCrop,  //是否显示裁剪边框  圆形裁剪建议去除
         var isCircRatioWigth :Int = 1, //裁剪宽
         var isCircRatioHeight :Int = 1,//裁剪高
         var isCompress:Boolean = true, //是否开启压缩  默认开启
-        var synOrAsy:Boolean = true,//同步true或异步false 压缩 默认同步
     )
-}
-
-
-enum class PictureType(val type: Int) {
-    TYPE_IMAGE(1),
-    TYPE_VIDEO(2),
-    TYPE_AUTDIO(3)
 }

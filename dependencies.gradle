@@ -95,26 +95,30 @@ dependencies {
     //RecyclerView 侧滑控件
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 
-
-    //coil
-    implementation("io.coil-kt:coil:1.2.1")
-
     //  TODO Banner轮播 https://github.com/youth5201314/banner
     implementation("com.youth.banner:banner:2.1.0")
 
     //TODO PickerView  条件选择器
     implementation("com.contrarywind:Android-PickerView:4.1.8")
 
-    // TODO 图片选择器  https://github.com/LuckSiege/PictureSelector
-    implementation("com.github.LuckSiege.PictureSelector:picture_library:v2.4.6")
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    //TODO 图片选择器  https://github.com/LuckSiege/PictureSelector
+    implementation("io.github.lucksiege:pictureselector:v3.0.7")
+    //TODO 图片选择器  压缩库
+    implementation("io.github.lucksiege:compress:v3.0.7")
+    //TODO 图片选择器  剪切库
+    implementation("io.github.lucksiege:ucrop:v3.0.7")
 
-    //roundedimageview  圆角图片
+
+    //TODO 图片加载库  Glide
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    //TODO 图片加载库  coil
+    implementation("io.coil-kt:coil:1.2.1")
+    //TODO 圆角图片
     implementation("com.makeramen:roundedimageview:2.3.0")
 
 
 
-    //retrofit
+    //TODO 网络请求相关库 Retrofit
     implementation "com.squareup.moshi:moshi:1.11.0"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"

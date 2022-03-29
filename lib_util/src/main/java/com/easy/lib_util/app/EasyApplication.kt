@@ -1,14 +1,8 @@
 package com.easy.lib_util.app
 
-import android.app.Activity
 import android.content.Context
-import android.os.Bundle
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
-import com.easy.lib_util.AppImp
-import com.easy.lib_util.executor.AppExecutorsHelper
-import com.easy.lib_util.store.MmkvUtil
-import com.easy.lib_util.tool.SignTool
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,6 +18,7 @@ abstract class EasyApplication : MultiDexApplication() , AppImp {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        //注册整个app的生命周期
         AppManager.register(this)
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
             initOtherSDK()

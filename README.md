@@ -87,3 +87,19 @@ SelectImageDialog(config:SelectImageConfig()){
 3:View.visibleOrGone  视图显示与隐藏
 
 ```
+
+
+## 常用 DSL 封装
+
+```
+
+//一:TextView 添加图片  渲染特殊文本与点击
+ binding.name.renderString {
+    addText(item.name){
+        setColor(R.color.white.getColor())
+        setSize(20)
+    }
+    addImg(R.drawable.ic_android.getDrawable())
+}
+
+```

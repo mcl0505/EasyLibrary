@@ -10,7 +10,6 @@ import androidx.collection.ArrayMap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.easy.lib_ui.R
 import com.easy.lib_ui.http.HttpHandler
 import com.easy.lib_ui.http.IBaseResponse
 import com.easy.lib_ui.http.RepositoryManager
@@ -19,11 +18,8 @@ import com.easy.lib_ui.mvvm.SingleLiveEvent
 import com.easy.lib_ui.mvvm.TokenInvalidLiveData
 import com.easy.lib_ui.mvvm.model.BaseModel
 import com.easy.lib_util.Utils
-import com.easy.lib_util.CheckUtil
 import com.easy.lib_util.bus.LiveDataBus
 
-import com.easy.lib_util.ext.getString
-import com.easy.lib_util.isInUIThread
 import com.easy.lib_util.toast.toast
 import com.imyyq.mvvm.base.IActivityResult
 import com.imyyq.mvvm.base.IArgumentsFromBundle
@@ -173,7 +169,6 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
     }
 
     fun setResult(resultCode: Int, data: Intent? = null) {
-        CheckUtil.checkStartAndFinishEvent(mUiChangeLiveData.setResultEvent)
         LiveDataBus.send(mUiChangeLiveData.setResultEvent!!, Pair(resultCode, data))
     }
 
@@ -182,7 +177,6 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
     }
 
     fun finish(resultCode: Int? = null, data: Intent? = null) {
-        CheckUtil.checkStartAndFinishEvent(mUiChangeLiveData.finishEvent)
         LiveDataBus.send(mUiChangeLiveData.finishEvent!!, Pair(resultCode, data))
     }
 
@@ -192,33 +186,27 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
     }
 
     fun startActivity(clazz: Class<out Activity>) {
-        CheckUtil.checkStartAndFinishEvent(mUiChangeLiveData.startActivityEvent)
         LiveDataBus.send(mUiChangeLiveData.startActivityEvent!!, clazz)
     }
 
     fun startActivity(clazz: Class<out Activity>, map: MutableMap<String, *>? = null,) {
-        CheckUtil.checkStartAndFinishEvent(mUiChangeLiveData.startActivityWithMapEvent)
         LiveDataBus.send(mUiChangeLiveData.startActivityWithMapEvent!!, Pair(clazz, map))
     }
 
     fun startActivity(clazz: Class<out Activity>, bundle: Bundle?) {
-        CheckUtil.checkStartAndFinishEvent(mUiChangeLiveData.startActivityEventWithBundle)
         LiveDataBus.send(mUiChangeLiveData.startActivityEventWithBundle!!, Pair(clazz, bundle))
     }
 
     fun startActivityForResult(clazz: Class<out Activity>) {
-        CheckUtil.checkStartForResultEvent(mUiChangeLiveData.startActivityForResultEvent)
         LiveDataBus.send(mUiChangeLiveData.startActivityForResultEvent!!, clazz)
     }
 
     fun startActivityForResult(clazz: Class<out Activity>, bundle: Bundle?) {
-        CheckUtil.checkStartForResultEvent(mUiChangeLiveData.startActivityForResultEventWithBundle)
         LiveDataBus.send(mUiChangeLiveData.startActivityForResultEventWithBundle!!,
             Pair(clazz, bundle))
     }
 
     fun startActivityForResult(clazz: Class<out Activity>, map: ArrayMap<String, *>) {
-        CheckUtil.checkStartForResultEvent(mUiChangeLiveData.startActivityForResultEventWithMap)
         LiveDataBus.send(mUiChangeLiveData.startActivityForResultEventWithMap!!, Pair(clazz, map))
     }
 

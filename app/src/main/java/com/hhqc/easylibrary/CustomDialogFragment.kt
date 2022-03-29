@@ -24,7 +24,8 @@ class CustomDialogFragment() : RationaleDialogFragment() {
         mPermissions = permissions
     }
 
-    private val permissionMap = mapOf(Manifest.permission.READ_CALENDAR to Manifest.permission_group.CALENDAR,
+    private val permissionMap = mapOf(
+        Manifest.permission.READ_CALENDAR to Manifest.permission_group.CALENDAR,
         Manifest.permission.WRITE_CALENDAR to Manifest.permission_group.CALENDAR,
         Manifest.permission.READ_CALL_LOG to Manifest.permission_group.CALL_LOG,
         Manifest.permission.WRITE_CALL_LOG to Manifest.permission_group.CALL_LOG,

@@ -1,4 +1,4 @@
-package com.easy.lib_util
+package com.easy.lib_util.app
 
 import android.app.Activity
 

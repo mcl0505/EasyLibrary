@@ -41,10 +41,7 @@ object FileUtil {
     val appLogDir: String
         get() {
             val s = "/Log/"
-            val path = if (isSDCardMounted)
-                cacheDir.absolutePath + s
-            else
-                EasyApplication.instance.filesDir.absolutePath + s
+            val path = appFileDir + s
             val file = File(path)
             if (!file.exists()) {
                 file.mkdirs()
@@ -55,10 +52,7 @@ object FileUtil {
     val appImageDir: String
         get() {
             val s = "/Image/"
-            val path = if (isSDCardMounted)
-                cacheDir.absolutePath + s
-            else
-                EasyApplication.instance.filesDir.absolutePath + s
+            val path = appFileDir + s
             val file = File(path)
             if (!file.exists()) {
                 file.mkdirs()

@@ -17,5 +17,5 @@ import com.hhqc.easylibrary.http.HttpRepository
  *   创建时间: 2022/03/29
  *   功能描述:
  */
-class MainViewModel(app: Application) :BaseViewModel<HttpRepository>(app){
+class MainViewModel :BaseViewModel<HttpRepository>(){
 }

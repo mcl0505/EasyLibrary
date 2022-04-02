@@ -10,6 +10,7 @@ import androidx.collection.ArrayMap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.easy.lib_ui.http.HttpHandler
 import com.easy.lib_ui.http.IBaseResponse
 import com.easy.lib_ui.http.RepositoryManager
@@ -24,7 +25,6 @@ import com.easy.lib_util.toast.toast
 import com.imyyq.mvvm.base.IActivityResult
 import com.imyyq.mvvm.base.IArgumentsFromBundle
 import com.imyyq.mvvm.base.IArgumentsFromIntent
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.*
 import retrofit2.Call
 import java.lang.reflect.ParameterizedType
@@ -32,7 +32,7 @@ import java.lang.reflect.Type
 import java.util.*
 import javax.security.auth.callback.Callback
 
-open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app), IViewModel,
+open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
     IActivityResult, IArgumentsFromBundle, IArgumentsFromIntent {
     /**
      * 可能存在没有仓库的 vm，但我们这里也不要是可 null 的。
@@ -65,8 +65,7 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
     internal var mBundle: Bundle? = null
     internal var mIntent: Intent? = null
 
-    constructor(app: Application, model: M) : this(app) {
-        isAutoCreateRepo = false
+    constructor( model: M) : this() {
         mModel = model
     }
 
@@ -80,7 +79,7 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
         onFailed: ((code: Int, msg: String?) -> Unit)? = {code,msg->
             when(code){
                 HttpHandler.CODE_TOKEN_INVALID->{
-                    startLoginActivity()
+                    TokenInvalidLiveData.postValue(true)
                 }
                 notHttpException->{
 //                    "返回数据格式错误,请重新请求".toast()
@@ -95,6 +94,7 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
         onComplete: (() -> Unit)? = null,
     ) {
         initCoroutineScope()
+        LiveDataBus.send(mUiChangeLiveData.showLoadingDialogEvent!!,"加载中")
         mCoroutineScope.launch {
             try {
                 withContext(Dispatchers.IO) {
@@ -106,6 +106,7 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
                 onFailed?.let { HttpHandler.handleException(e, it) }
             } finally {
                 onComplete?.invoke()
+                LiveDataBus.send(mUiChangeLiveData.dismissLoadingDialogEvent!!,"")
             }
         }
     }
@@ -150,9 +151,7 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
      */
     fun cancelConsumingTask() {
         // ViewModel销毁时会执行，同时取消所有异步任务
-        if (this::mCompositeDisposable.isInitialized) {
-            (mCompositeDisposable as CompositeDisposable).clear()
-        }
+
         if (this::mCallList.isInitialized) {
             mCallList.forEach { it.cancel() }
             mCallList.clear()
@@ -180,11 +179,6 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
         LiveDataBus.send(mUiChangeLiveData.finishEvent!!, Pair(resultCode, data))
     }
 
-    fun startLoginActivity() {
-        //退出登录
-        TokenInvalidLiveData.postValue(true)
-    }
-
     fun startActivity(clazz: Class<out Activity>) {
         LiveDataBus.send(mUiChangeLiveData.startActivityEvent!!, clazz)
     }
@@ -210,68 +204,11 @@ open class BaseViewModel<M : BaseModel>(app: Application) : AndroidViewModel(app
         LiveDataBus.send(mUiChangeLiveData.startActivityForResultEventWithMap!!, Pair(clazz, map))
     }
 
-
-    // ===================================================================================
-
-    /**
-     * 通用的 Ui 改变变量
-     */
-    class UiChangeLiveData {
-        var showLoadingDialogEvent: SingleLiveEvent<String?>? = null
-        var dismissLoadingDialogEvent: SingleLiveEvent<Any?>? = null
-
-        var showCusDialogFragmentEvent: SingleLiveEvent<String>? = null
-        var dismissCusDialogFragmentEvent: SingleLiveEvent<Any?>? = null
-
-
-        var startLoginActivityEvent: String? = null
-        var startActivityEvent: String? = null
-        var startActivityWithMapEvent: String? = null
-        var startActivityEventWithBundle: String? = null
-
-        var startActivityForResultEvent: String? = null
-        var startActivityForResultEventWithMap: String? = null
-        var startActivityForResultEventWithBundle: String? = null
-
-        var finishEvent: String? = null
-        var setResultEvent: String? = null
-
-        var loadSirEvent: SingleLiveEvent<Class<out Callback>?>? = null
-
-        fun initLoadSirEvent() {
-            loadSirEvent = SingleLiveEvent()
-        }
-
-        fun initLoadingDialogEvent() {
-            showLoadingDialogEvent = SingleLiveEvent()
-            dismissLoadingDialogEvent = SingleLiveEvent()
-        }
-
-        fun initCusDialogFragmentEvent() {
-            showCusDialogFragmentEvent = SingleLiveEvent()
-            dismissCusDialogFragmentEvent = SingleLiveEvent()
-        }
-
-        fun initStartActivityForResultEvent() {
-            startActivityForResultEvent = UUID.randomUUID().toString()
-            startActivityForResultEventWithMap = UUID.randomUUID().toString()
-            startActivityForResultEventWithBundle = UUID.randomUUID().toString()
-        }
-
-        fun initStartAndFinishEvent() {
-            startLoginActivityEvent = "token"
-            startActivityEvent = UUID.randomUUID().toString()
-            startActivityWithMapEvent = UUID.randomUUID().toString()
-            startActivityEventWithBundle = UUID.randomUUID().toString()
-            finishEvent = UUID.randomUUID().toString()
-            setResultEvent = UUID.randomUUID().toString()
-        }
-    }
-
+    // =================================  获取跳转到当前界面获取到的参数 ==================================================
+    //常用于 Fragment   也可用于Activity
     override fun getBundle(): Bundle? = mBundle
-
+    //只能用于  Activity
     override fun getArgumentsIntent(): Intent? = mIntent
-
 
     // ===================================================================================
     /**

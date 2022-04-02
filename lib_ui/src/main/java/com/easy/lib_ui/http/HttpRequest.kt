@@ -7,8 +7,6 @@ import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.*
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -56,6 +54,18 @@ object HttpRequest {
     }
 
     /**
+     * 设置了 [mDefaultBaseUrl] 后，可通过此方法获取 Service
+     */
+    @JvmStatic
+    fun <T> getService(cls: Class<T>): T {
+        if (!this::mDefaultBaseUrl.isInitialized) {
+            throw RuntimeException("必须初始化 mBaseUrl")
+        }
+
+        return getService(cls, mDefaultBaseUrl, null)
+    }
+
+    /**
      * 如果有不同的 baseURL，那么可以相同 baseURL 的接口都放在一个 Service 钟，通过此方法来获取
      */
     @JvmStatic
@@ -100,17 +110,7 @@ object HttpRequest {
             .build()
     }
 
-    /**
-     * 设置了 [mDefaultBaseUrl] 后，可通过此方法获取 Service
-     */
-    @JvmStatic
-    fun <T> getService(cls: Class<T>): T {
-        if (!this::mDefaultBaseUrl.isInitialized) {
-            throw RuntimeException("必须初始化 mBaseUrl")
-        }
 
-        return getService(cls, mDefaultBaseUrl, null)
-    }
 
     /**
      * 同步的请求，当一个界面需要调用多个接口才能呈现出来时，可以在子线程中或者Observable.zip操作多个接口

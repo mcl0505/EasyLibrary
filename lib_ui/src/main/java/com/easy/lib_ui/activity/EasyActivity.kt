@@ -224,52 +224,56 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
                 }
             }
         })
+
+
+
+    }
+
+    /**
+     * 自己定义的设置回调方法
+     */
+    fun setResult(pair: Pair<Int?, Intent?>) {
+        pair.first?.let { resultCode ->
+            val intent = pair.second
+            if (intent == null) {
+                setResult(resultCode)
+            } else {
+                setResult(resultCode, intent)
+            }
+        }
     }
 
     @CallSuper
     override fun initUiChangeLiveData() {
-        //界面跳转
-        mViewModel.mUiChangeLiveData.initStartAndFinishEvent()
-
-        fun setResult(pair: Pair<Int?, Intent?>) {
-            pair.first?.let { resultCode ->
-                val intent = pair.second
-                if (intent == null) {
-                    setResult(resultCode)
-                } else {
-                    setResult(resultCode, intent)
-                }
-            }
-        }
+        //显示操作等待框
+        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.showLoadingDialogEvent!!,{
+            mLoadingDialog.showDialog(false,it)
+        })
+        //隐藏操作等待框
+        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.showLoadingDialogEvent!!,{
+            mLoadingDialog.dismissDialog()
+        })
 
         // vm 可以结束界面
-        LiveDataBus.observe<Pair<Int?, Intent?>>(
-            this,
-            mViewModel.mUiChangeLiveData.finishEvent!!,
+        LiveDataBus.observe<Pair<Int?, Intent?>>(this, mViewModel.mUiChangeLiveData.finishEvent!!,
             Observer {
                 setResult(it)
                 finish()
             },
             true
         )
-        LiveDataBus.observe<Pair<Int?, Intent?>>(
-            this,
-            mViewModel.mUiChangeLiveData.setResultEvent!!,
+        LiveDataBus.observe<Pair<Int?, Intent?>>(this, mViewModel.mUiChangeLiveData.setResultEvent!!,
             Observer { setResult(it) },
             true
         )
         // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(
-            this,
-            mViewModel.mUiChangeLiveData.startActivityEvent!!,
+        LiveDataBus.observe<Class<out Activity>>(this, mViewModel.mUiChangeLiveData.startActivityEvent!!,
             Observer {
                 startActivity(it)
             },
             true
         )
-
-        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this,
-            mViewModel.mUiChangeLiveData.startActivityWithMapEvent!!,
+        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this, mViewModel.mUiChangeLiveData.startActivityWithMapEvent!!,
             Observer {
                 startActivity(it?.first, it?.second)
             },
@@ -283,14 +287,9 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             },
             true
         )
-
-
         //页面跳转回调
-        mViewModel.mUiChangeLiveData.initStartActivityForResultEvent()
-
         // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(
-            this,
+        LiveDataBus.observe<Class<out Activity>>(this,
             mViewModel.mUiChangeLiveData.startActivityForResultEvent!!,
             Observer {
                 startActivityForResult(it)
@@ -298,16 +297,14 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             true
         )
         // vm 可以启动界面，并携带 Bundle，接收方可调用 getBundle 获取
-        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(
-            this,
+        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(this,
             mViewModel.mUiChangeLiveData.startActivityForResultEventWithBundle!!,
             Observer {
                 startActivityForResult(it?.first, bundle = it?.second)
             },
             true
         )
-        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(
-            this,
+        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this,
             mViewModel.mUiChangeLiveData.startActivityForResultEventWithMap!!,
             Observer {
                 startActivityForResult(it?.first, it?.second)

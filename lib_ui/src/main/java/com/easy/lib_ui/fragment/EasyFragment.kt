@@ -172,7 +172,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
         })
 
 
-        mViewModel.mUiChangeLiveData.initStartAndFinishEvent()
 
         // vm 可以结束界面
         LiveDataBus.observe(
@@ -205,9 +204,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
             },
             true
         )
-
-
-        mViewModel.mUiChangeLiveData.initStartActivityForResultEvent()
 
         // vm 可以启动界面
         LiveDataBus.observe<Class<out Activity>>(

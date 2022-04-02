@@ -2,7 +2,6 @@
 apply from: "version.gradle"
 buildscript {
     ext.kotlin_version = '1.5.31'
-    ext.koin_version = '2.2.0-rc-3'
     repositories {
         google()
         jcenter() { url 'https://maven.aliyun.com/repository/public' }

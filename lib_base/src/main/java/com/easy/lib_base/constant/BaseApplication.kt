@@ -15,13 +15,21 @@ import com.easy.lib_util.tool.SignTool
 open abstract class BaseApplication : EasyApplication() {
     override fun onCreate() {
         super.onCreate()
-        //请求地址
-        HttpRequest.mDefaultBaseUrl = getHttpHost()
+        initHttpCommonParameter()
         //App 版本更新
         UpdateAppUtils.init(this)
         //App 基础信息
         SignTool.printSignatureMD5(this)
         //初始化本地信息缓存
         MmkvUtil.init(this)
+    }
+
+    /**
+     * 设置网络请求的基本信息
+     * 可在这个方法中添加  请求头  拦截器
+     */
+    fun initHttpCommonParameter(){
+        //请求地址
+        HttpRequest.mDefaultBaseUrl = getHttpHost()
     }
 }

@@ -10,18 +10,8 @@ import okhttp3.RequestBody
 abstract class BaseModel : IModel {
     override fun onCleared() {}
 
-
-    open fun postJson(map: Map<String, String>): RequestBody = RequestBody.create(
-        "application/json;charset=UTF-8".toMediaTypeOrNull(),
-        JSON.toJSONString(map)
-    )
-
-    open fun postJson2(map: Map<String, Any>): RequestBody = RequestBody.create(
-        "application/json;charset=UTF-8".toMediaTypeOrNull(),
-        JSON.toJSONString(map)
-    )
-
-    open fun postJsonObject(ojb: Any): RequestBody = RequestBody.create(
+    // TODO: 2022/3/30 传递JSON  数据
+    open fun postJson(ojb: Any): RequestBody = RequestBody.create(
         "application/json;charset=UTF-8".toMediaTypeOrNull(),
         JSON.toJSONString(ojb)
     )

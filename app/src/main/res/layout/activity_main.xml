@@ -15,16 +15,19 @@
         tools:context=".app.MainActivity"
         android:orientation="vertical">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addData"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:gravity="center"
             android:text="添加数据"/>
 
         <Button
             android:id="@+id/deleteData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            drawable_radius="10dp"
             android:text="删除数据"/>
 
         <ImageView

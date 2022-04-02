@@ -25,6 +25,7 @@ fun Int.getStringArray() : List<String> = EasyApplication.getContext().resources
 //DP  px= dp （dpi/160）
 //SP  sp 主要用作字体的单位
 fun Int.toDp(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
+fun Float.toDp(): Float = (this * Resources.getSystem().displayMetrics.density)
 fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 fun Double.toDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 fun Double.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()

@@ -1,5 +1,6 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize' //TODO Parcelable 实现生成器
 
 kapt {
     arguments {
@@ -21,7 +22,6 @@ android {
         versionName rootProject.ext.defaultVersion.versionName
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
 
 
         //路由配置
@@ -56,6 +56,7 @@ android {
 dependencies {
     def nav_version = "2.3.5"
     api fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+    // TODO  方法数超限解决方案
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -65,78 +66,72 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //阿里解析
     implementation 'com.alibaba:fastjson:1.2.58'
     //gson
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation "com.google.code.gson:gson:2.8.6"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //TODO  DSL 封装库 
     implementation "org.jetbrains.anko:anko-sdk25:${rootProject.ext.depVersion.ankoVersion}"
     implementation "org.jetbrains.anko:anko-appcompat-v7:${rootProject.ext.depVersion.ankoVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //paging3
-    implementation 'androidx.paging:paging-runtime:3.0.1'
     //协程使用
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     //版本要与gradle版本一致
-    kapt  "com.android.databinding:compiler:7.0.2"
+    kapt "com.android.databinding:compiler:7.0.2"
 
     //refresh
-    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'
-    implementation 'com.scwang.smart:refresh-header-classics:2.0.3'
+    implementation "com.scwang.smart:refresh-layout-kernel:${rootProject.ext.depVersion.smartVersion}"
+    implementation "com.scwang.smart:refresh-header-classics:${rootProject.ext.depVersion.smartVersion}"
     //RecyclerView 侧滑控件
-    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+    implementation "com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0"
 
     //  TODO Banner轮播 https://github.com/youth5201314/banner
-    implementation("com.youth.banner:banner:2.1.0")
+    implementation "com.youth.banner:banner:2.1.0"
 
     //TODO PickerView  条件选择器
-    implementation("com.contrarywind:Android-PickerView:4.1.8")
+    implementation "com.contrarywind:Android-PickerView:4.1.8"
 
     //TODO 图片选择器  https://github.com/LuckSiege/PictureSelector
-    implementation("io.github.lucksiege:pictureselector:v3.0.7")
+    implementation "io.github.lucksiege:pictureselector:${rootProject.ext.depVersion.pictureselectorVersion}"
     //TODO 图片选择器  压缩库
-    implementation("io.github.lucksiege:compress:v3.0.7")
+    implementation "io.github.lucksiege:compress:${rootProject.ext.depVersion.pictureselectorVersion}"
     //TODO 图片选择器  剪切库
-    implementation("io.github.lucksiege:ucrop:v3.0.7")
+    implementation "io.github.lucksiege:ucrop:${rootProject.ext.depVersion.pictureselectorVersion}"
 
 
     //TODO 图片加载库  Glide
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation "com.github.bumptech.glide:glide:4.11.0"
     //TODO 图片加载库  coil
-    implementation("io.coil-kt:coil:1.2.1")
+    implementation "io.coil-kt:coil:1.2.1"
     //TODO 圆角图片
-    implementation("com.makeramen:roundedimageview:2.3.0")
+    implementation "com.makeramen:roundedimageview:2.3.0"
 
-
-
-    //TODO 网络请求相关库 Retrofit
+    //TODO 网络请求相关库 Retrofit+Moshi
     implementation "com.squareup.moshi:moshi:1.11.0"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.32"
 
-    //TODO   MMKV  腾讯开源组件 代替SP  https://github.com/tencent/mmkv
+    //TODO MMKV  腾讯开源组件 代替SP  https://github.com/tencent/mmkv
     implementation "com.tencent:mmkv-static:1.2.7"
     //TODO 自定义日历 https://github.com/huanghaibin-dev/CalendarView
     implementation 'com.haibin:calendarview:3.7.1'
-    //富文本解析
+    //TODO 富文本解析
     implementation 'com.zzhoujay.richtext:richtext:2.4.7'
     //TODO  filedownloader  文件下载  https://github.com/lingochamp/FileDownloader   项目中用作app下载
     implementation 'com.liulishuo.filedownloader:library:1.7.7'
-    //动画
+    //TODO 动画
     implementation 'com.airbnb.android:lottie:4.0.0'
 }

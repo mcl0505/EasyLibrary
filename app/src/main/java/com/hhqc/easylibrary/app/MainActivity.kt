@@ -1,10 +1,11 @@
 package com.hhqc.easylibrary.app
 
+import android.graphics.drawable.GradientDrawable
 import com.easy.lib_ui.activity.BaseNoViewModelActivity
 import com.easy.lib_ui.adapter.BaseDataBindAdapter
 import com.easy.lib_ui.dialog.image.SelectImageDialog
 import com.easy.lib_util.dsl.text.renderString
-import com.easy.lib_util.dsl.view.drawable
+import com.easy.lib_util.dsl.view.renderDrawable
 import com.easy.lib_util.ext.getColor
 import com.easy.lib_util.ext.getDrawable
 import com.easy.lib_util.ext.singleClick
@@ -39,11 +40,11 @@ class MainActivity : BaseNoViewModelActivity<ActivityMainBinding>(R.layout.activ
             }.show(supportFragmentManager)
         }
 
-        mBinding.addData.drawable {
-            setDrawable {
-                setSolidColor(R.color.app_color.getColor())
+        mBinding.addData.renderDrawable {
+
+            setGradientLinear {
                 setCornerSize(20f)
-                setStroke(2,R.color.color_21A41F.getColor())
+                setGradientLinear(intArrayOf(R.color.app_color.getColor(),R.color.color_4DCC71.getColor()))
             }
         }
 

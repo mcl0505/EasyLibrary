@@ -1,6 +1,8 @@
 package com.easy.lib_util.dsl.view
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.view.View
@@ -18,7 +20,7 @@ import com.easy.lib_util.ext.toDp
  */
 
 
-inline fun View.drawable(init: DslViewDrawableBuilder.() -> Unit) {
+inline fun View.renderDrawable(init: DslViewDrawableBuilder.() -> Unit) {
     //具体实现类
     val drawableBuilder = DslViewDrawableBuilderImpl()
     drawableBuilder.init()
@@ -29,6 +31,9 @@ inline fun View.drawable(init: DslViewDrawableBuilder.() -> Unit) {
 interface DslViewDrawableBuilder {
     //设置 获取Drawable
     fun setDrawable(method: (DslViewBuilder.() -> Unit)? = null)
+
+    //设置 设置渐变
+    fun setGradientLinear(method: (DslViewBuilder.() -> Unit)? = null)
 }
 
 //属性
@@ -44,7 +49,7 @@ interface DslViewBuilder {
     fun setCornerSize(size: Float)
 
     /**
-     * 设置不同的圆角  左下  左上  右上  右下
+     * 设置不同的圆角  [左下,左上,右上,右下]
      */
     fun mViewCornerRadii(size: FloatArray)
 
@@ -52,6 +57,17 @@ interface DslViewBuilder {
      * 边框
      */
     fun setStroke(size: Int,color: Int)
+
+    /**
+     * 线性渐变
+     * @param colorArray 颜色数组
+     * @param gradientType 渐变方式
+     *        LEFT_RIGHT ===>  左到右  颜色数组中的顺序即是渐变顺序
+     *        RIGHT_LEFT ===>  右到左  颜色数组中的顺序即是渐变顺序
+     *        BOTTOM_TOP ===>  下到上  颜色数组中的顺序即是渐变顺序
+     *        TOP_BOTTOM ===>  上到下  颜色数组中的顺序即是渐变顺序
+     */
+    fun setGradientLinear(colorArray: IntArray,gradientType:GradientDrawable.Orientation?=GradientDrawable.Orientation.LEFT_RIGHT)
 }
 
 //属性实现
@@ -60,6 +76,8 @@ class DslViewBuilderImp : DslViewBuilder {
     var mViewSolidColor: Int? = R.color.ps_color_transparent.getColor()
     var mViewCornerSize: Float? = 0f
     var mViewCornerRadii: FloatArray? = floatArrayOf(0f,0f,0f,0f)
+    var mViewGradient: IntArray? = intArrayOf() //渐变颜色值
+    var mViewGradientType: GradientDrawable.Orientation? = GradientDrawable.Orientation.RIGHT_LEFT
     var mViewStrokeSize: Int? = 0
     var mViewStrokeColor: Int? = R.color.ps_color_transparent.getColor()
 
@@ -81,6 +99,11 @@ class DslViewBuilderImp : DslViewBuilder {
         mViewStrokeColor = color
     }
 
+    override fun setGradientLinear(colorArray: IntArray,gradientType:GradientDrawable.Orientation?) {
+        mViewGradient = colorArray
+        mViewGradientType = gradientType
+    }
+
 }
 
 class DslViewDrawableBuilderImpl : DslViewDrawableBuilder {
@@ -99,7 +122,25 @@ class DslViewDrawableBuilderImpl : DslViewDrawableBuilder {
         }
 
         drawable.setStroke(mDrawableBuilder.mViewStrokeSize!!.toDp(),mDrawableBuilder.mViewStrokeColor!!)
+    }
 
+    override fun setGradientLinear(method: (DslViewBuilder.() -> Unit)?) {
+        val mDrawableBuilder = DslViewBuilderImp()
+        method?.let { mDrawableBuilder.it() }
+
+        if (mDrawableBuilder.mViewCornerSize!!>0){
+            drawable.cornerRadius = mDrawableBuilder.mViewCornerSize!!.toDp()
+        }else {
+            drawable.cornerRadii = mDrawableBuilder.mViewCornerRadii!!
+        }
+
+        //设置渐变方向
+        // LINEAR_GRADIENT  线性从左倒右  颜色数组中的顺序即是渐变顺序
+        drawable.gradientType = LINEAR_GRADIENT
+        mDrawableBuilder.mViewGradientType?.let {
+            drawable.orientation = it
+            drawable.colors = mDrawableBuilder.mViewGradient!!
+        }
     }
 
     fun build(): GradientDrawable {

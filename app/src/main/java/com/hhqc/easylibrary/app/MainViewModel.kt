@@ -1,7 +1,5 @@
 package com.hhqc.easylibrary.app
 
-import android.app.Application
-import com.easy.lib_ui.http.HttpRequest
 import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
 import com.hhqc.easylibrary.http.HttpRepository
 
@@ -18,4 +16,6 @@ import com.hhqc.easylibrary.http.HttpRepository
  *   功能描述:
  */
 class MainViewModel :BaseViewModel<HttpRepository>(){
+
+
 }

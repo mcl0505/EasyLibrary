@@ -1,14 +1,9 @@
 package com.easy.lib_util.dsl.view
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT
-import android.text.SpannableStringBuilder
-import android.text.style.AbsoluteSizeSpan
 import android.view.View
 import com.easy.lib_util.R
-import com.easy.lib_util.dsl.text.DslSpanBuilder
-import com.easy.lib_util.dsl.text.DslSpannableStringBuilderImpl
 import com.easy.lib_util.ext.getColor
 import com.easy.lib_util.ext.toDp
 

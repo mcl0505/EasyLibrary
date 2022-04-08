@@ -18,6 +18,7 @@ class App : BaseApplication(){
         return null
     }
 
-    override fun getHttpHost(): String = if (isDebug)"http://192.168.0.99:9966/" else "http://110.42.202.238:9966/"
+    //测试
+    override fun getHttpHost(): String = "https://www.wanandroid.com"
 
 }

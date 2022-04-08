@@ -1,13 +1,11 @@
-package com.easy.lib_ui.mvvm.viewmodel
+package com.easy.lib_ui.mvvm.viewmodel.flow
 
 import android.app.Activity
-import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.collection.ArrayMap
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,33 +13,35 @@ import com.easy.lib_ui.http.HttpHandler
 import com.easy.lib_ui.http.IBaseResponse
 import com.easy.lib_ui.http.RepositoryManager
 import com.easy.lib_ui.http.notHttpException
-import com.easy.lib_ui.mvvm.SingleLiveEvent
 import com.easy.lib_ui.mvvm.TokenInvalidLiveData
 import com.easy.lib_ui.mvvm.model.BaseModel
+import com.easy.lib_ui.mvvm.viewmodel.IViewModel
+import com.easy.lib_ui.mvvm.viewmodel.UiChangeLiveData
 import com.easy.lib_util.Utils
 import com.easy.lib_util.bus.LiveDataBus
-
 import com.easy.lib_util.toast.toast
 import com.imyyq.mvvm.base.IActivityResult
 import com.imyyq.mvvm.base.IArgumentsFromBundle
 import com.imyyq.mvvm.base.IArgumentsFromIntent
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.combineTransform
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import java.util.*
-import javax.security.auth.callback.Callback
 
-open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
+/**
+ *   公司名称: ~漫漫人生路~总得错几步~
+ *   创建作者: Android 孟从伦
+ *   创建时间: 2022/04/06
+ *   功能描述: Flow 请求返回处理的ViewModel
+ */
+class FlowViewModel<M : BaseModel>() : ViewModel(), IViewModel,
     IActivityResult, IArgumentsFromBundle, IArgumentsFromIntent {
+
     /**
      * 可能存在没有仓库的 vm，但我们这里也不要是可 null 的。
      * 如果 vm 没有提供仓库，说明此变量不可用，还去使用的话自然就报错。
@@ -62,7 +62,7 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
         clickEvent(it)
     }
 
-    open fun clickEvent(view:View){}
+    open fun clickEvent(view: View){}
 
     private lateinit var mCompositeDisposable: Any
     private lateinit var mCallList: MutableList<Call<*>>
@@ -89,7 +89,7 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
                 HttpHandler.CODE_TOKEN_INVALID->{
                     TokenInvalidLiveData.postValue(true)
                 }
-                notHttpException->{
+                notHttpException ->{
 //                    "返回数据格式错误,请重新请求".toast()
                 }
                 else ->{
@@ -104,7 +104,7 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
         isShowLoadiongMsg :String = "加载中...",
     ) {
         initCoroutineScope()
-        if (isShowLoadiong)LiveDataBus.send(mUiChangeLiveData.showLoadingDialogEvent!!,isShowLoadiongMsg)
+        if (isShowLoadiong) LiveDataBus.send(mUiChangeLiveData.showLoadingDialogEvent!!,isShowLoadiongMsg)
 
         mCoroutineScope.launch {
             try {
@@ -117,7 +117,7 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
                 onFailed?.let { HttpHandler.handleException(e, it) }
             } finally {
                 onComplete?.invoke()
-                if (isShowLoadiong)LiveDataBus.send(mUiChangeLiveData.dismissLoadingDialogEvent!!,isShowLoadiongMsg)
+                if (isShowLoadiong) LiveDataBus.send(mUiChangeLiveData.dismissLoadingDialogEvent!!,isShowLoadiongMsg)
             }
         }
     }

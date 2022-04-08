@@ -1,5 +1,10 @@
 package com.hhqc.easylibrary.http
 
+import com.easy.lib_ui.mvvm.viewmodel.flow.ApiResponse
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
+
 /**
  *   公司名称: ~漫漫人生路~总得错几步~
  *   创建作者: Android 孟从伦
@@ -39,4 +44,7 @@ package com.hhqc.easylibrary.http
  */
 interface ApiService {
 
+    @POST("/user/login")
+    @FormUrlEncoded
+    suspend fun login(@FieldMap  map: Map<String, String>) : ApiResponse<String>
 }

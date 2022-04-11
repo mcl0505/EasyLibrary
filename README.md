@@ -2,6 +2,7 @@
 
 > 规范
 
+
 ### Activity
 
     所有的Activity 都继承与 EasyActivity  

@@ -72,28 +72,28 @@ ext {
 
     Jetbrains = [
             // TODO  Kotlin
-            "kotlinStdlib"      : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlinVersion}",
-            "kotlinStdlib7"     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlinVersion}",
-            "kotlinStdlib8"     : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version.kotlinVersion}",
-            "kotlinReflect"     : "org.jetbrains.kotlin:kotlin-reflect:${version.kotlinVersion}",
+            "kotlinStdlib"     : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlinVersion}",
+            "kotlinStdlib7"    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlinVersion}",
+            "kotlinStdlib8"    : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version.kotlinVersion}",
+            "kotlinReflect"    : "org.jetbrains.kotlin:kotlin-reflect:${version.kotlinVersion}",
 
             // TODO  协程
             //协程使用
-            "coroutinesAndroid" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version.coroutinesVersion}",
-            "coroutinesCore"    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version.coroutinesVersion}",
+            "coroutinesAndroid": "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version.coroutinesVersion}",
+            "coroutinesCore"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version.coroutinesVersion}",
             //TODO  DSL 封装库
-            "anko"              : "org.jetbrains.anko:anko-sdk25:${version.ankoVersion}",
-            "ankoAppcompat"     : "org.jetbrains.anko:anko-appcompat-v7:${version.ankoVersion}",
+            "anko"             : "org.jetbrains.anko:anko-sdk25:${version.ankoVersion}",
+            "ankoAppcompat"    : "org.jetbrains.anko:anko-appcompat-v7:${version.ankoVersion}",
     ]
 
     Squareup = [
             // TODO  网络请求
-            "moshi"             : "com.squareup.moshi:moshi:${version.moshiVersion}",
-            "moshiCodegen"             : "com.squareup.moshi:moshi-kotlin-codegen:${version.moshiVersion}",
-            "okhttp"            : "com.squareup.okhttp3:okhttp:${version.okhttpVersion}",
-                "okhttpInterceptor" : "com.squareup.okhttp3:logging-interceptor:${version.okhttpVersion}",
-            "retrofitMoshi"     : "com.squareup.retrofit2:converter-moshi:${version.retrofitVersion}",
-            "retrofit"          : "com.squareup.retrofit2:retrofit:${version.retrofitVersion}",
+            "moshi"            : "com.squareup.moshi:moshi:${version.moshiVersion}",
+            "moshiCodegen"     : "com.squareup.moshi:moshi-kotlin-codegen:${version.moshiVersion}",
+            "okhttp"           : "com.squareup.okhttp3:okhttp:${version.okhttpVersion}",
+            "okhttpInterceptor": "com.squareup.okhttp3:logging-interceptor:${version.okhttpVersion}",
+            "retrofitMoshi"    : "com.squareup.retrofit2:converter-moshi:${version.retrofitVersion}",
+            "retrofit"         : "com.squareup.retrofit2:retrofit:${version.retrofitVersion}",
     ]
 
     GitHub = [
@@ -108,6 +108,8 @@ ext {
             "smartRefresh"      : "com.scwang.smart:refresh-layout-kernel:${version.smartVersion}",
             "smartRefreshHeader": "com.scwang.smart:refresh-header-classics:${version.smartVersion}",
             "smartRefreshFooter": "com.scwang.smart:refresh-footer-classics:${version.smartVersion}",
+            // TODO  适配器框架 https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+            "brvh"              : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7",
             // TODO  数据解析
             "fastjson"          : "com.alibaba:fastjson:${version.fastjsonVersion}",
             "gson"              : "com.google.code.gson:gson:${version.gsonVersion}",

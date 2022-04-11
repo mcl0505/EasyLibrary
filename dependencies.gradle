@@ -99,6 +99,7 @@ dependencies {
     implementation rootProject.ext.GitHub.smartRefresh
     implementation rootProject.ext.GitHub.smartRefreshHeader
     implementation rootProject.ext.GitHub.smartRefreshFooter
+    implementation rootProject.ext.GitHub.brvh
     // TODO  阿里解析
     implementation rootProject.ext.GitHub.fastjson
     // TODO  gson

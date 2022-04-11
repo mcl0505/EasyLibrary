@@ -93,7 +93,6 @@ open abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewMo
         mViewModel.refreshData()
     }
 
-
     open fun onRefreshData(){
         mViewModel.refreshData()
     }

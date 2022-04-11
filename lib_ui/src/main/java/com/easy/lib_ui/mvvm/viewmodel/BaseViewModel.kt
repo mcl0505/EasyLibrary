@@ -40,8 +40,7 @@ import java.lang.reflect.Type
 import java.util.*
 import javax.security.auth.callback.Callback
 
-open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
-    IActivityResult, IArgumentsFromBundle, IArgumentsFromIntent {
+open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel{
     /**
      * 可能存在没有仓库的 vm，但我们这里也不要是可 null 的。
      * 如果 vm 没有提供仓库，说明此变量不可用，还去使用的话自然就报错。
@@ -69,9 +68,6 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
     private lateinit var mCoroutineScope: CoroutineScope
 
     internal val mUiChangeLiveData by lazy { UiChangeLiveData() }
-
-    internal var mBundle: Bundle? = null
-    internal var mIntent: Intent? = null
 
     constructor( model: M) : this() {
         mModel = model
@@ -171,55 +167,6 @@ open class BaseViewModel<M : BaseModel>() : ViewModel(), IViewModel,
             mCoroutineScope.cancel()
         }
     }
-
-    // 以下是界面开启和结束相关的 =========================================================
-
-    fun setResult(resultCode: Int, map: MutableMap<String, *>? = null, bundle: Bundle? = null, ) {
-        setResult(resultCode, Utils.getIntentByMapOrBundle(map = map, bundle = bundle))
-    }
-
-    fun setResult(resultCode: Int, data: Intent? = null) {
-        LiveDataBus.send(mUiChangeLiveData.setResultEvent!!, Pair(resultCode, data))
-    }
-
-    open fun finish(resultCode: Int? = null, map: MutableMap<String, *>? = null, bundle: Bundle? = null, ) {
-        finish(resultCode, Utils.getIntentByMapOrBundle(map = map, bundle = bundle))
-    }
-
-    fun finish(resultCode: Int? = null, data: Intent? = null) {
-        LiveDataBus.send(mUiChangeLiveData.finishEvent!!, Pair(resultCode, data))
-    }
-
-    fun startActivity(clazz: Class<out Activity>) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityEvent!!, clazz)
-    }
-
-    fun startActivity(clazz: Class<out Activity>, map: MutableMap<String, *>? = null,) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityWithMapEvent!!, Pair(clazz, map))
-    }
-
-    fun startActivity(clazz: Class<out Activity>, bundle: Bundle?) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityEventWithBundle!!, Pair(clazz, bundle))
-    }
-
-    fun startActivityForResult(clazz: Class<out Activity>) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityForResultEvent!!, clazz)
-    }
-
-    fun startActivityForResult(clazz: Class<out Activity>, bundle: Bundle?) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityForResultEventWithBundle!!,
-            Pair(clazz, bundle))
-    }
-
-    fun startActivityForResult(clazz: Class<out Activity>, map: ArrayMap<String, *>) {
-        LiveDataBus.send(mUiChangeLiveData.startActivityForResultEventWithMap!!, Pair(clazz, map))
-    }
-
-    // =================================  获取跳转到当前界面获取到的参数 ==================================================
-    //常用于 Fragment   也可用于Activity
-    override fun getBundle(): Bundle? = mBundle
-    //只能用于  Activity
-    override fun getArgumentsIntent(): Intent? = mIntent
 
     // ===================================================================================
     /**

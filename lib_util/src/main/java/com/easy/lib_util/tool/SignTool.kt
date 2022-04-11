@@ -2,7 +2,6 @@ package com.easy.lib_util.tool
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.easy.lib_util.LogUtil
 import com.easy.lib_util.app.AppUtil
 import okhttp3.internal.and

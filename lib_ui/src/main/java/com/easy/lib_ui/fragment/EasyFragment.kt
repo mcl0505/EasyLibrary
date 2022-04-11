@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 
 abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
     private val sharedViewModel: Boolean = false,
-) : Fragment(), IView<V, VM>, IActivityResult {
+) : Fragment(), IView<V, VM>{
     //Activity 标识
     open val TAG: String get() = this::class.java.simpleName
     protected lateinit var mContext: Context
@@ -115,7 +115,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
         }
         // 让 vm 可以感知 v 的生命周期
         lifecycle.addObserver(mViewModel)
-        initStartActivityForResult()
 
         mLoadingDialog.onCancelLoadingDialog = {
             mViewModel.cancelConsumingTask()
@@ -154,7 +153,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
 
     @CallSuper
     override fun initUiChangeLiveData() {
-
         //网络状态监听
         LiveDataBus.observe<NetStateReceiver.NetState>(this, "NetStateReceiver", {
             LogUtil.d("NetStateReceiver.NetState=${it}")
@@ -170,123 +168,8 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
                 }
             }
         })
-
-
-
-        // vm 可以结束界面
-        LiveDataBus.observe(
-            this,
-            mViewModel.mUiChangeLiveData.finishEvent!!,
-            Observer { activity?.finish() },
-            true
-        )
-        // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(
-            this,
-            mViewModel.mUiChangeLiveData.startActivityEvent!!,
-            Observer {
-                startActivity(it)
-            },
-            true
-        )
-        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this,
-            mViewModel.mUiChangeLiveData.startActivityWithMapEvent!!,
-            Observer {
-                startActivity(it?.first, it?.second)
-            },
-            true
-        )
-        // vm 可以启动界面，并携带 Bundle，接收方可调用 getBundle 获取
-        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(this,
-            mViewModel.mUiChangeLiveData.startActivityEventWithBundle!!,
-            Observer {
-                startActivity(it?.first, bundle = it?.second)
-            },
-            true
-        )
-
-        // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(
-            this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEvent!!,
-            Observer {
-                startActivityForResult(it)
-            },
-            true
-        )
-        // vm 可以启动界面，并携带 Bundle，接收方可调用 getBundle 获取
-        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(
-            this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEventWithBundle!!,
-            Observer {
-                startActivityForResult(it?.first, bundle = it?.second)
-            },
-            true
-        )
-        LiveDataBus.observe<Pair<Class<out Activity>, ArrayMap<String, *>>>(
-            this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEventWithMap!!,
-            Observer {
-                startActivityForResult(it?.first, it?.second)
-            },
-            true
-        )
-
-
     }
 
-    fun startActivity(
-        clz: Class<out Activity>?,
-        map: MutableMap<String, *>? = null,
-        bundle: Bundle? = null,
-    ) {
-        startActivity(Utils.getIntentByMapOrBundle(activity, clz, map, bundle))
-    }
-
-    fun startActivityForResult(
-        clz: Class<out Activity>?,
-        map: MutableMap<String, *>? = null,
-        bundle: Bundle? = null,
-    ) {
-
-        mStartActivityForResult.launch(Utils.getIntentByMapOrBundle(activity, clz, map, bundle))
-    }
-
-    private fun initStartActivityForResult() {
-        if (!this::mStartActivityForResult.isInitialized) {
-            mStartActivityForResult =
-                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    val data = it.data ?: Intent()
-                    when (it.resultCode) {
-                        Activity.RESULT_OK -> {
-                            onActivityResultOk(data)
-                            if (this::mViewModel.isInitialized) {
-                                mViewModel.onActivityResultOk(data)
-                            }
-                        }
-                        Activity.RESULT_CANCELED -> {
-                            onActivityResultCanceled(data)
-                            if (this::mViewModel.isInitialized) {
-                                mViewModel.onActivityResultCanceled(data)
-                            }
-                        }
-                        else -> {
-                            onActivityResult(it.resultCode, data)
-                            if (this::mViewModel.isInitialized) {
-                                mViewModel.onActivityResult(it.resultCode, data)
-                            }
-                        }
-                    }
-                }
-        }
-    }
-
-    /**
-     * 通过 setArguments 传递 bundle，在这里可以获取
-     */
-    override fun getBundle(): Bundle? {
-        return arguments
-    }
 
     /**
      * 如果加载中对话框可手动取消，并且开启了取消耗时任务的功能，则在取消对话框后调用取消耗时任务

@@ -53,8 +53,7 @@ import com.easy.lib_util.bus.LiveDataBus
  * 4:页面状态配置
  */
 abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> :
-    AppCompatActivity(R.layout.activity_root),
-    IView<V, VM>, IActivityResult, IArgumentsFromIntent {
+    AppCompatActivity(R.layout.activity_root), IView<V, VM>{
     //Activity 标识
     open val TAG: String get() = this::class.java.simpleName
     protected lateinit var mContext: Context
@@ -115,8 +114,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
         initViewObservable()
         //基础事件观察
         initBaseLiveData()
-        //页面跳转数据回调注册监听
-        initStartActivityForResult()
     }
 
     open fun onLayoutBefore() {}
@@ -131,7 +128,7 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             titleLine.visibleOrGone(false)
             visibleOrGone(!setTitleText().isNullOrEmpty())
             tvTitleCenter.text = setTitleText()
-            imgTitleLeft.singleClick { onBackPressed() }
+            imgTitleLeft.singleClick { finish() }
         }
         //动态注册网络状态广播  跟随随Activity生命周期
         registerReceiver()
@@ -175,7 +172,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
     @CallSuper
     override fun initViewAndViewModel() {
         mViewModel = initViewModel(this)
-        mViewModel.mIntent = getArgumentsIntent()
         // 让 vm 可以感知 v 的生命周期
         lifecycle.addObserver(mViewModel)
 
@@ -225,22 +221,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             }
         })
 
-
-
-    }
-
-    /**
-     * 自己定义的设置回调方法
-     */
-    fun setResult(pair: Pair<Int?, Intent?>) {
-        pair.first?.let { resultCode ->
-            val intent = pair.second
-            if (intent == null) {
-                setResult(resultCode)
-            } else {
-                setResult(resultCode, intent)
-            }
-        }
     }
 
     @CallSuper
@@ -250,134 +230,14 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             mLoadingDialog.showDialog(false,it)
         })
         //隐藏操作等待框
-        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.showLoadingDialogEvent!!,{
+        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.dismissLoadingDialogEvent!!,{
             mLoadingDialog.dismissDialog()
         })
-
-        // vm 可以结束界面
-        LiveDataBus.observe<Pair<Int?, Intent?>>(this, mViewModel.mUiChangeLiveData.finishEvent!!,
-            Observer {
-                setResult(it)
-                finish()
-            },
-            true
-        )
-        LiveDataBus.observe<Pair<Int?, Intent?>>(this, mViewModel.mUiChangeLiveData.setResultEvent!!,
-            Observer { setResult(it) },
-            true
-        )
-        // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(this, mViewModel.mUiChangeLiveData.startActivityEvent!!,
-            Observer {
-                startActivity(it)
-            },
-            true
-        )
-        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this, mViewModel.mUiChangeLiveData.startActivityWithMapEvent!!,
-            Observer {
-                startActivity(it?.first, it?.second)
-            },
-            true
-        )
-        // vm 可以启动界面，并携带 Bundle，接收方可调用 getBundle 获取
-        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(this,
-            mViewModel.mUiChangeLiveData.startActivityEventWithBundle!!,
-            Observer {
-                startActivity(it?.first, bundle = it?.second)
-            },
-            true
-        )
-        //页面跳转回调
-        // vm 可以启动界面
-        LiveDataBus.observe<Class<out Activity>>(this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEvent!!,
-            Observer {
-                startActivityForResult(it)
-            },
-            true
-        )
-        // vm 可以启动界面，并携带 Bundle，接收方可调用 getBundle 获取
-        LiveDataBus.observe<Pair<Class<out Activity>, Bundle?>>(this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEventWithBundle!!,
-            Observer {
-                startActivityForResult(it?.first, bundle = it?.second)
-            },
-            true
-        )
-        LiveDataBus.observe<Pair<Class<out Activity>, MutableMap<String, *>>>(this,
-            mViewModel.mUiChangeLiveData.startActivityForResultEventWithMap!!,
-            Observer {
-                startActivityForResult(it?.first, it?.second)
-            },
-            true
-        )
 
 
     }
 
     protected var time: Long = 0
-
-    /**
-     * 跳转封装
-     * @param clz 目标界面
-     * @param map 参数
-     * @param bundle 参数
-     */
-    fun startActivity(clz: Class<out Activity>?, map: MutableMap<String, *>? = null, bundle: Bundle? = null) {
-        startActivity(Utils.getIntentByMapOrBundle(this, clz, map, bundle))
-    }
-
-    /**
-     * 跳转封装  可接受返回数据
-     * @param clz 目标界面
-     * @param map 参数
-     * @param bundle 参数
-     */
-    fun startActivityForResult(clz: Class<out Activity>?, map: MutableMap<String, *>? = null, bundle: Bundle? = null) {
-        mStartActivityForResult.launch(Utils.getIntentByMapOrBundle(this, clz, map, bundle))
-    }
-
-    //必须先在OnCreate 中注册
-    private fun initStartActivityForResult() {
-        if (!this::mStartActivityForResult.isInitialized) {
-            mStartActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                val data = it.data ?: Intent()
-                when (it.resultCode) {
-                    Activity.RESULT_OK -> {
-                        onActivityResultOk(data)
-                        if (this::mViewModel.isInitialized) {
-                            mViewModel.onActivityResultOk(data)
-                        }
-                    }
-                    Activity.RESULT_CANCELED -> {
-                        onActivityResultCanceled(data)
-                        if (this::mViewModel.isInitialized) {
-                            mViewModel.onActivityResultCanceled(data)
-                        }
-                    }
-                    else -> {
-                        onActivityResult(it.resultCode, data)
-                        if (this::mViewModel.isInitialized) {
-                            mViewModel.onActivityResult(it.resultCode, data)
-                        }
-                    }
-                }
-            }
-        }
-
-
-    }
-
-    /**
-     * 通过 [BaseViewModel.startActivity] 传递 bundle，在这里可以获取
-     */
-    final override fun getBundle(): Bundle? {
-        return intent.extras
-    }
-
-    final override fun getArgumentsIntent(): Intent? {
-        return intent
-    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -13,30 +13,10 @@ class UiChangeLiveData {
     //操作等待框
     var showLoadingDialogEvent: String? = null
     var dismissLoadingDialogEvent: String? = null
-    //界面跳转
-    var startActivityEvent: String? = null
-    var startActivityWithMapEvent: String? = null
-    var startActivityEventWithBundle: String? = null
-    //界面回调
-    var startActivityForResultEvent: String? = null
-    var startActivityForResultEventWithMap: String? = null
-    var startActivityForResultEventWithBundle: String? = null
-    //界面结束与设置回调
-    var finishEvent: String? = null
-    var setResultEvent: String? = null
 
     init {
         showLoadingDialogEvent = UUID.randomUUID().toString()
         dismissLoadingDialogEvent = UUID.randomUUID().toString()
-        startActivityForResultEvent = UUID.randomUUID().toString()
-        startActivityForResultEventWithMap = UUID.randomUUID().toString()
-        startActivityForResultEventWithBundle = UUID.randomUUID().toString()
-
-        startActivityEvent = UUID.randomUUID().toString()
-        startActivityWithMapEvent = UUID.randomUUID().toString()
-        startActivityEventWithBundle = UUID.randomUUID().toString()
-        finishEvent = UUID.randomUUID().toString()
-        setResultEvent = UUID.randomUUID().toString()
     }
 
 }

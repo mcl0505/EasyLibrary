@@ -15,11 +15,11 @@ import com.easy.lib_util.tool.SignTool
 open abstract class BaseApplication : EasyApplication() {
     override fun onCreate() {
         super.onCreate()
+        //App 基础信息
+        SignTool.printSignatureMD5(this)
         initHttpCommonParameter()
         //App 版本更新
         UpdateAppUtils.init(this)
-        //App 基础信息
-        SignTool.printSignatureMD5(this)
         //初始化本地信息缓存
         MmkvUtil.init(this)
     }

@@ -78,8 +78,6 @@ interface IView<V : ViewBinding, VM : BaseViewModel<out BaseModel>>: IArgumentsF
             viewModelStoreOwner,
             ViewModelProvider.AndroidViewModelFactory(EasyApplication.instance)
         ).get(modelClass)
-        // 让 vm 也可以直接获取到 bundle
-        vm.mBundle = getBundle()
         return vm
     }
 }

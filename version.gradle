@@ -8,7 +8,7 @@ ext {
             minSdkVersion    : 23,                  //最低支持的Android版本
             targetSdkVersion : 31,                  //默认适配的版本
             versionCode      : 1,                   //APK版本号  依次递增
-            versionName      : "v 1.0.6"              //版本名称    APK版本更新可修改
+            versionName      : "v 1.0.1"              //版本名称    APK版本更新可修改
     ]
 
     // TODO  签名信息
@@ -51,77 +51,77 @@ ext {
             lottieVersion          : "4.0.0",//动画
     ]
 
-    // TODO  依赖信息
-    dependencies = [
-            // TODO  基础
-            core              : "androidx.core:core-ktx:1.5.0",
-            appcompat         : "androidx.appcompat:appcompat:1.3.1",
-            vectordrawable    : "androidx.vectordrawable:vectordrawable:1.1.0",
-            viewpager2        : "androidx.viewpager2:viewpager2:${version.viewpager2Version}",
-            multidex          : "androidx.multidex:multidex:${version.multidexVersion}",
-            constraintlayout  : "androidx.constraintlayout:constraintlayout:${version.constraintlayoutVersion}",
-            material          : "com.google.android.material:material:${version.materialVersion}",
-            banner            : "com.youth.banner:banner:2.1.0",
-            databinding       : "com.android.databinding:compiler:${version.databindingVersion}",
-
-            // TODO  Kotlin
-            kotlinStdlib      : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlinVersion}",
-            kotlinStdlib7     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlinVersion}",
-            kotlinStdlib8     : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version.kotlinVersion}",
-            kotlinReflect     : "org.jetbrains.kotlin:kotlin-reflect:${version.kotlinVersion}",
-
-            // TODO  图片选择器  https://github.com/LuckSiege/PictureSelector
-            pictureSelector   : "io.github.lucksiege:pictureselector:${version.pictureselectorVersion}",
-            pictureCompress   : "io.github.lucksiege:compress:${version.pictureselectorVersion}",
-            pictureUcrop      : "io.github.lucksiege:ucrop:${version.pictureselectorVersion}",
-
+    AndroidX = [
+            "junit"             : "junit:junit:4.12",
+            "core"              : "androidx.core:core-ktx:1.5.0",
+            "appcompat"         : "androidx.appcompat:appcompat:1.3.1",
+            "vectordrawable"    : "androidx.vectordrawable:vectordrawable:1.1.0",
+            "test"              : "androidx.test.ext:junit:1.1.2",
+            "espresso"          : "androidx.test.espresso:espresso-core:3.3.0",
+            "viewpager2"        : "androidx.viewpager2:viewpager2:${version.viewpager2Version}",
+            "multidex"          : "androidx.multidex:multidex:${version.multidexVersion}",
+            "constraintlayout"  : "androidx.constraintlayout:constraintlayout:${version.constraintlayoutVersion}",
             // TODO  生命周期相关
-            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}",
-            lifecycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}",
-            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}",
-
+            "lifecycleViewModel": "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}",
+            "lifecycleLiveData" : "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}",
+            "lifecycleRuntime"  : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}",
             // TODO  页面导航
-            navigationFragment: "androidx.navigation:navigation-fragment-ktx:${version.navigationVersion}",
-            navigationUi      : "androidx.navigation:navigation-ui-ktx:${version.navigationVersion}",
+            "navigationFragment": "androidx.navigation:navigation-fragment-ktx:${version.navigationVersion}",
+            "navigationUi"      : "androidx.navigation:navigation-ui-ktx:${version.navigationVersion}",
+    ]
 
-            // TODO  Smart 刷新框架
-            smartRefresh      : "com.scwang.smart:refresh-layout-kernel:${version.smartVersion}",
-            smartRefreshHeader: "com.scwang.smart:refresh-header-classics:${version.smartVersion}",
-            smartRefreshFooter: "com.scwang.smart:refresh-footer-classics:${version.smartVersion}",
+    Jetbrains = [
+            // TODO  Kotlin
+            "kotlinStdlib"      : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlinVersion}",
+            "kotlinStdlib7"     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlinVersion}",
+            "kotlinStdlib8"     : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version.kotlinVersion}",
+            "kotlinReflect"     : "org.jetbrains.kotlin:kotlin-reflect:${version.kotlinVersion}",
 
             // TODO  协程
             //协程使用
-            coroutinesAndroid : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version.coroutinesVersion}",
-            coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version.coroutinesVersion}",
-
-            // TODO  数据解析
-            fastjson          : "com.alibaba:fastjson:${version.fastjsonVersion}",
-            gson              : "com.google.code.gson:gson:${version.gsonVersion}",
-            moshi             : "com.squareup.moshi:moshi:${version.moshiVersion}",
-            moshiKotlin       : "com.squareup.moshi:moshi-kotlin-codegen:${version.moshiVersion}",
-
-            // TODO  网络请求
-            moshi             : "com.squareup.moshi:moshi:${version.moshiVersion}",
-            okhttp            : "com.squareup.okhttp3:okhttp:${version.okhttpVersion}",
-            okhttpInterceptor : "com.squareup.okhttp3:logging-interceptor:${version.okhttpVersion}",
-            retrofitMoshi     : "com.squareup.retrofit2:converter-moshi:${version.retrofitVersion}",
-            retrofit          : "com.squareup.retrofit2:retrofit:${version.retrofitVersion}",
-            // TODO  文件下载  https://github.com/lingochamp/FileDownloader   项目中用作app下载
-            filedownloader    : "com.liulishuo.filedownloader:library:${version.filedownloaderVersion}",
-            // TODO  图片加载
-            glide             : "com.github.bumptech.glide:glide:${version.glideVersion}",
-            coil              : "io.coil-kt:coil:${version.coilVersion}",
-            roundedimageview  : "com.makeramen:roundedimageview:${version.roundVersion}",
-            lottie            : "com.airbnb.android:lottie:${version.lottieVersion}",
-            // TODO  数据存储
-            mmkv              : "com.tencent:mmkv-static:${version.mmkvVersion}",
+            "coroutinesAndroid" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version.coroutinesVersion}",
+            "coroutinesCore"    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version.coroutinesVersion}",
             //TODO  DSL 封装库
-            anko              : "org.jetbrains.anko:anko-sdk25:${version.ankoVersion}",
-            ankoAppcompat     : "org.jetbrains.anko:anko-appcompat-v7:${version.ankoVersion}",
-            pickerView        : "com.contrarywind:Android-PickerView:4.1.8",
+            "anko"              : "org.jetbrains.anko:anko-sdk25:${version.ankoVersion}",
+            "ankoAppcompat"     : "org.jetbrains.anko:anko-appcompat-v7:${version.ankoVersion}",
     ]
 
+    Squareup = [
+            // TODO  网络请求
+            "moshi"             : "com.squareup.moshi:moshi:${version.moshiVersion}",
+            "moshiCodegen"             : "com.squareup.moshi:moshi-kotlin-codegen:${version.moshiVersion}",
+            "okhttp"            : "com.squareup.okhttp3:okhttp:${version.okhttpVersion}",
+                "okhttpInterceptor" : "com.squareup.okhttp3:logging-interceptor:${version.okhttpVersion}",
+            "retrofitMoshi"     : "com.squareup.retrofit2:converter-moshi:${version.retrofitVersion}",
+            "retrofit"          : "com.squareup.retrofit2:retrofit:${version.retrofitVersion}",
+    ]
 
-    // TODO  关联依赖文件  api rootProject.ext.libraries
-    libraries = dependencies.values()
+    GitHub = [
+            "material"          : "com.google.android.material:material:${version.materialVersion}",
+            "databinding"       : "com.android.databinding:compiler:${version.databindingVersion}",
+            "banner"            : "com.youth.banner:banner:2.1.0",
+            // TODO  图片选择器  https://github.com/LuckSiege/PictureSelector
+            "pictureSelector"   : "io.github.lucksiege:pictureselector:${version.pictureselectorVersion}",
+            "pictureCompress"   : "io.github.lucksiege:compress:${version.pictureselectorVersion}",
+            "pictureUcrop"      : "io.github.lucksiege:ucrop:${version.pictureselectorVersion}",
+            // TODO  Smart 刷新框架
+            "smartRefresh"      : "com.scwang.smart:refresh-layout-kernel:${version.smartVersion}",
+            "smartRefreshHeader": "com.scwang.smart:refresh-header-classics:${version.smartVersion}",
+            "smartRefreshFooter": "com.scwang.smart:refresh-footer-classics:${version.smartVersion}",
+            // TODO  数据解析
+            "fastjson"          : "com.alibaba:fastjson:${version.fastjsonVersion}",
+            "gson"              : "com.google.code.gson:gson:${version.gsonVersion}",
+            // TODO  文件下载  https://github.com/lingochamp/FileDownloader   项目中用作app下载
+            "filedownloader"    : "com.liulishuo.filedownloader:library:${version.filedownloaderVersion}",
+            // TODO  图片加载
+            "glide"             : "com.github.bumptech.glide:glide:${version.glideVersion}",
+            "coil"              : "io.coil-kt:coil:${version.coilVersion}",
+            "roundedimageview"  : "com.makeramen:roundedimageview:${version.roundVersion}",
+            "lottie"            : "com.airbnb.android:lottie:${version.lottieVersion}",
+            // TODO  数据存储
+            "mmkv"              : "com.tencent:mmkv-static:${version.mmkvVersion}",
+            // TODO  选择器
+            "pickerView"        : "com.contrarywind:Android-PickerView:4.1.8",
+    ]
+
 }

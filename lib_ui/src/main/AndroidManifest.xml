@@ -20,16 +20,16 @@
         <activity
             android:name=".update.UpdateAppActivity"
             android:launchMode="singleTask"
+            android:exported="true"
             android:theme="@style/DialogActivityTheme" />
         <!--    图片预览    -->
-        <activity android:name=".ui.PreviewImageActivity" />
+        <activity android:name=".ui.PreviewImageActivity" android:exported="true"/>
         <!--    App 更新服务    -->
-        <service android:name=".update.UpdateAppService" />
+        <service android:name=".update.UpdateAppService" android:exported="true"/>
 
         <provider
             android:name=".update.UpdateFileProvider"
             android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"

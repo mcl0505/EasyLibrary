@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 apply from:'../dependencies.gradle'
 
+// TODO  启动模块专属配置
 android {
-
     defaultConfig {
         applicationId rootProject.ext.buildVersion.applicationId
     }
 
     signingConfigs {
         release {
-            keyAlias ALIAS_NAME
-            keyPassword ALIAS_PASS
-            storeFile file(KEY_PATH)
-            storePassword KAY_PASS
+            keyAlias rootProject.ext.release.ALIAS_NAME
+            keyPassword rootProject.ext.release.ALIAS_PASS
+            storeFile file(rootProject.ext.release.KEY_PATH)
+            storePassword rootProject.ext.release.KAY_PASS
             v1SigningEnabled true
             v2SigningEnabled true
         }

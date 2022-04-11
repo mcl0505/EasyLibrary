@@ -16,6 +16,14 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        google()
+        jcenter() { url 'https://maven.aliyun.com/repository/public' }
+        maven {url "https://jitpack.io"}
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

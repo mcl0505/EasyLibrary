@@ -4,6 +4,5 @@ apply plugin: 'kotlin-android'
 
 
 dependencies {
-    //TODO  HellowCharts 统计图控件  https://github.com/lecho/hellocharts-android
-    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    api project(path: ':module_login')
 }

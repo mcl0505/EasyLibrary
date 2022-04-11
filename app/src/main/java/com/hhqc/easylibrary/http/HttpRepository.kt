@@ -13,5 +13,4 @@ import com.easy.lib_ui.mvvm.model.BaseModel
 class HttpRepository : BaseModel() {
     private var api = HttpRequest.getService(ApiService::class.java)
 
-    suspend fun login(map: Map<String, String>) = api.login(map)
 }

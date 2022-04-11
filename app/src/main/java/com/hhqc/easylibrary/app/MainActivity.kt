@@ -1,6 +1,9 @@
 package com.hhqc.easylibrary.app
 
 import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
+import com.easy.lib_base.constant.ARouterPath
 import com.easy.lib_ui.activity.BaseNoViewModelActivity
 import com.easy.lib_ui.adapter.BaseDataBindAdapter
 import com.easy.lib_ui.dialog.image.SelectImageDialog
@@ -30,9 +33,10 @@ class MainActivity : BaseNoViewModelActivity<ActivityMainBinding>(R.layout.activ
     override fun initData() {
         mBinding.mRecycler.adapter = mAdapter
         mBinding.addData.singleClick {
-            val mainEntity = MainEntity("梦虍  $number")
-            mAdapter.addList(mutableListOf(mainEntity))
-            number += 1
+//            val mainEntity = MainEntity("梦虍  $number")
+//            mAdapter.addList(mutableListOf(mainEntity))
+//            number += 1
+            ARouter.getInstance().build(ARouterPath.PATH_LOGIN_ACTIVITY).navigation()
         }
         mBinding.deleteData.singleClick {
             SelectImageDialog{

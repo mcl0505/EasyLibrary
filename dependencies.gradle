@@ -2,11 +2,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize' //TODO Parcelable 实现生成器
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
 
 kapt {
     generateStubs = true
@@ -44,6 +39,12 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    //路由配置
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
     }
 }
 
@@ -116,4 +117,7 @@ dependencies {
     implementation rootProject.ext.GitHub.mmkv
     //TODO PickerView  条件选择器
     implementation rootProject.ext.GitHub.pickerView
+    //TODO PickerView  条件选择器
+    implementation rootProject.ext.GitHub.arouter
+    kapt rootProject.ext.GitHub.arouterCompiler
 }

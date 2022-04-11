@@ -1,5 +1,6 @@
 package com.easy.lib_base.constant
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.easy.lib_ui.http.HttpRequest
 import com.easy.lib_ui.update.UpdateAppUtils
 import com.easy.lib_util.app.EasyApplication
@@ -18,6 +19,8 @@ open abstract class BaseApplication : EasyApplication() {
         //App 基础信息
         SignTool.printSignatureMD5(this)
         initHttpCommonParameter()
+        //路由初始化
+        ARouter.init(this)
         //App 版本更新
         UpdateAppUtils.init(this)
         //初始化本地信息缓存

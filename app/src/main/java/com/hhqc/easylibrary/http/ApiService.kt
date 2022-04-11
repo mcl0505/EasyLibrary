@@ -1,6 +1,5 @@
 package com.hhqc.easylibrary.http
 
-import com.easy.lib_ui.mvvm.viewmodel.flow.ApiResponse
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -44,7 +43,4 @@ import retrofit2.http.POST
  */
 interface ApiService {
 
-    @POST("/user/login")
-    @FormUrlEncoded
-    suspend fun login(@FieldMap  map: Map<String, String>) : ApiResponse<String>
 }

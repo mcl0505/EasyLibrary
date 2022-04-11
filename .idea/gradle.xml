@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/lib_base" />
             <option value="$PROJECT_DIR$/lib_ui" />
             <option value="$PROJECT_DIR$/lib_util" />
+            <option value="$PROJECT_DIR$/module_login" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

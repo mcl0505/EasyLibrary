@@ -124,6 +124,9 @@ ext {
             "mmkv"              : "com.tencent:mmkv-static:${version.mmkvVersion}",
             // TODO  选择器
             "pickerView"        : "com.contrarywind:Android-PickerView:4.1.8",
+            // TODO  路由跳转
+            "arouter"           : "com.alibaba:arouter-api:1.5.2",
+            "arouterCompiler"   : "com.alibaba:arouter-compiler:1.5.2",
     ]
 
 }

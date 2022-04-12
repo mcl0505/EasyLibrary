@@ -41,6 +41,7 @@ import com.easy.lib_util.receiver.NetStateReceiver
 import android.net.ConnectivityManager
 
 import android.content.IntentFilter
+import android.widget.FrameLayout
 import com.easy.lib_util.LogUtil
 import com.easy.lib_util.bus.LiveDataBus
 
@@ -52,22 +53,17 @@ import com.easy.lib_util.bus.LiveDataBus
  * 3:ViewBindiing 配置
  * 4:页面状态配置
  */
-abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> :
+abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
     AppCompatActivity(R.layout.activity_root), IView<V, VM>{
     //Activity 标识
     open val TAG: String get() = this::class.java.simpleName
     protected lateinit var mContext: Context
     protected lateinit var mBinding: V
     protected lateinit var mViewModel: VM
+    protected lateinit var mViewContent: FrameLayout
 
     //标题
     protected lateinit var mTitlebar: TitleBar
-
-    //内容
-    private lateinit var mViewContent: MultiStateView
-
-    //页面跳转返回数据
-    private lateinit var mStartActivityForResult: ActivityResultLauncher<Intent>
 
     private lateinit var mLoadingDialog: LoadingDialog
 
@@ -76,14 +72,8 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
     //true=黑色  false=白色
     open val isDark get() = false
 
-    //true=使用多状态布局  false=不使用
-    open val isMultiState get() = true
-
     //true=禁用重力感应  false=启用重力感应
     open val isNoSensor get() = false
-
-    //当前页面展示布局状态
-    open var mViewCurrentState = MultiStateView.STATE_LOADING
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,7 +113,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
     private fun initTitle() {
         mTitlebar = findViewById(R.id.titleBar)
         mViewContent = findViewById(R.id.frame_content)
-        mViewContent.successView = mBinding.root
         mTitlebar.apply {
             titleLine.visibleOrGone(false)
             visibleOrGone(!setTitleText().isNullOrEmpty())
@@ -131,37 +120,7 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             imgTitleLeft.singleClick { finish() }
         }
         //动态注册网络状态广播  跟随随Activity生命周期
-        registerReceiver()
-    }
-
-    private fun initMultiStateView(state: Int) {
-        mViewCurrentState = state
-        AppExecutorsHelper.uiHandler {
-            if (isMultiState) {
-                when (state) {
-                    MultiStateView.STATE_LOADING -> {
-                        mViewContent.showLoading()
-                    }
-                    MultiStateView.STATE_SUCCESS -> {
-                        mViewContent.showSuccess()
-                    }
-                    MultiStateView.STATE_EMPTY -> {
-                        mViewContent.showEmpty()
-                    }
-                    MultiStateView.STATE_NET_ERROR -> {
-                        mViewContent.showNetError()
-                    }
-                    MultiStateView.STATE_UNKNOWN -> {
-                        mViewContent.showUnKnown()
-                    }
-                    MultiStateView.STATE_NEW_STATE -> {
-                        mViewContent.showNewStateView()
-                    }
-                }
-            } else {
-                mViewContent.showSuccess()
-            }
-        }
+//        registerReceiver()
     }
 
     /**
@@ -206,20 +165,20 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel<out BaseModel>> 
             }
         })
         //网络状态监听
-        LiveDataBus.observe<NetStateReceiver.NetState>(this,"NetStateReceiver",{
-            LogUtil.d("NetStateReceiver.NetState=${it}")
-            when(it){
-                NetStateReceiver.NetState.CONNECT_NO -> {
-                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
-                }
-                else -> {
-                    initMultiStateView(MultiStateView.STATE_LOADING)
-                    AppExecutorsHelper.postDelayed({
-                        initMultiStateView(MultiStateView.STATE_SUCCESS)
-                    })
-                }
-            }
-        })
+//        LiveDataBus.observe<NetStateReceiver.NetState>(this,"NetStateReceiver",{
+//            LogUtil.d("NetStateReceiver.NetState=${it}")
+//            when(it){
+//                NetStateReceiver.NetState.CONNECT_NO -> {
+//                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
+//                }
+//                else -> {
+//                    initMultiStateView(MultiStateView.STATE_LOADING)
+//                    AppExecutorsHelper.postDelayed({
+//                        initMultiStateView(MultiStateView.STATE_SUCCESS)
+//                    })
+//                }
+//            }
+//        })
 
     }
 

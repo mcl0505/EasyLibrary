@@ -11,7 +11,7 @@ import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
 import com.easy.lib_util.LogUtil
 import com.kckj.baselibrary.ext.bindingInflate
 
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<out BaseModel>>(
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes
     private val layoutId: Int,
     private val varViewModelId: Int,

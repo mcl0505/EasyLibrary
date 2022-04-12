@@ -4,5 +4,6 @@ apply plugin: 'kotlin-android'
 
 
 dependencies {
+
     api project(path: ':module_login')
 }

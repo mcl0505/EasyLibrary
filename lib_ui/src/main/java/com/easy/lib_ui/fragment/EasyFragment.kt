@@ -33,7 +33,7 @@ import com.imyyq.mvvm.base.IActivityResult
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
+abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel>(
     private val sharedViewModel: Boolean = false,
 ) : Fragment(), IView<V, VM>{
     //Activity 标识
@@ -44,19 +44,11 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
     protected lateinit var mBinding: V
     protected lateinit var mViewModel: VM
     protected lateinit var mView: View
-
     //标题
     protected lateinit var mTitlebar: TitleBar
-
-    //true=使用多状态布局  false=不使用
-    open val isMultiState get() = true
-
     //内容
-    private lateinit var mViewContent: MultiStateView
-
+    private lateinit var mViewContent: FrameLayout
     //当前页面展示布局状态
-    open var mViewCurrentState = MultiStateView.STATE_LOADING
-    private lateinit var mStartActivityForResult: ActivityResultLauncher<Intent>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -88,7 +80,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
         mTitlebar = mView.findViewById(R.id.titleBar)
         mViewContent = mView.findViewById(R.id.frame_content)
         mBinding = initBinding(layoutInflater, null)
-        mViewContent.successView = mBinding.root
         mTitlebar.apply {
             visibleOrGone(!setTitleText().isNullOrEmpty())
             tvTitleCenter.text = setTitleText()
@@ -121,53 +112,24 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel<out BaseModel>>(
         }
     }
 
-    private fun initMultiStateView(state: Int) {
-        mViewCurrentState = state
-        AppExecutorsHelper.uiHandler {
-            if (isMultiState) {
-                when (state) {
-                    MultiStateView.STATE_LOADING -> {
-                        mViewContent.showLoading()
-                    }
-                    MultiStateView.STATE_SUCCESS -> {
-                        mViewContent.showSuccess()
-                    }
-                    MultiStateView.STATE_EMPTY -> {
-                        mViewContent.showEmpty()
-                    }
-                    MultiStateView.STATE_NET_ERROR -> {
-                        mViewContent.showNetError()
-                    }
-                    MultiStateView.STATE_UNKNOWN -> {
-                        mViewContent.showUnKnown()
-                    }
-                    MultiStateView.STATE_NEW_STATE -> {
-                        mViewContent.showNewStateView()
-                    }
-                }
-            } else {
-                mViewContent.showSuccess()
-            }
-        }
-    }
 
     @CallSuper
     override fun initUiChangeLiveData() {
         //网络状态监听
-        LiveDataBus.observe<NetStateReceiver.NetState>(this, "NetStateReceiver", {
-            LogUtil.d("NetStateReceiver.NetState=${it}")
-            when (it) {
-                NetStateReceiver.NetState.CONNECT_NO -> {
-                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
-                }
-                else -> {
-                    initMultiStateView(MultiStateView.STATE_LOADING)
-                    AppExecutorsHelper.postDelayed({
-                        initMultiStateView(MultiStateView.STATE_SUCCESS)
-                    })
-                }
-            }
-        })
+//        LiveDataBus.observe<NetStateReceiver.NetState>(this, "NetStateReceiver", {
+//            LogUtil.d("NetStateReceiver.NetState=${it}")
+//            when (it) {
+//                NetStateReceiver.NetState.CONNECT_NO -> {
+//                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
+//                }
+//                else -> {
+//                    initMultiStateView(MultiStateView.STATE_LOADING)
+//                    AppExecutorsHelper.postDelayed({
+//                        initMultiStateView(MultiStateView.STATE_SUCCESS)
+//                    })
+//                }
+//            }
+//        })
     }
 
 

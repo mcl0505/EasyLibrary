@@ -1,14 +1,31 @@
 package com.mh55.module_login
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.easy.lib_base.constant.ARouterPath.PATH_LOGIN_ACTIVITY
+import com.easy.lib_ui.activity.BaseActivity
+import com.easy.lib_ui.http.BaseResult
+import com.easy.lib_ui.mvvm.IStateObserver
+import com.easy.lib_util.ext.observe
+import com.easy.lib_util.ext.singleClick
+import com.mh55.module_login.databinding.ActivityLoginBinding
+import com.mh55.module_login.http.vm.LoginViewModel
 
 @Route(path = PATH_LOGIN_ACTIVITY)
-class LoginActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login,BR.viewModel) {
+    override fun setTitleText(): String = "登录"
+
+    override fun initData() {
+        super.initData()
+        mBinding.tvLogin.singleClick {
+            mViewModel.login()
+        }
+    }
+
+    override fun initViewObservable() {
+        super.initViewObservable()
+        mViewModel.mLogin.observe(this,object : IStateObserver<String>(){
+            override fun onDataChange(data: String?) {
+            }
+        })
     }
 }

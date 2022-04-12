@@ -2,6 +2,24 @@
 apply from:'../module.gradle'
 apply plugin: 'kotlin-android'
 
+android {
+    defaultConfig {
+        // 如果是应用需要指定application
+        if(singleModule.toBoolean()) {
+            applicationId "com.mh55.module_login"
+        }
+    }
+    sourceSets {
+        main {
+            // 应用和库的AndroidManifest文件区分
+            if(singleModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+}
 
 dependencies {
 

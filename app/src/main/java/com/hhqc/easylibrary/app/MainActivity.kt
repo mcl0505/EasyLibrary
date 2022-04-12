@@ -7,6 +7,7 @@ import com.easy.lib_base.constant.ARouterPath
 import com.easy.lib_ui.activity.BaseNoViewModelActivity
 import com.easy.lib_ui.adapter.BaseDataBindAdapter
 import com.easy.lib_ui.dialog.image.SelectImageDialog
+import com.easy.lib_util.bus.LiveDataBus
 import com.easy.lib_util.dsl.text.renderString
 import com.easy.lib_util.dsl.view.renderDrawable
 import com.easy.lib_util.ext.getColor
@@ -37,6 +38,7 @@ class MainActivity : BaseNoViewModelActivity<ActivityMainBinding>(R.layout.activ
 //            mAdapter.addList(mutableListOf(mainEntity))
 //            number += 1
             ARouter.getInstance().build(ARouterPath.PATH_LOGIN_ACTIVITY).navigation()
+            LiveDataBus.send(ARouterPath.PATH_LOGIN_ACTIVITY,"欢迎来到登录界面")
         }
         mBinding.deleteData.singleClick {
             SelectImageDialog{

@@ -120,4 +120,6 @@ dependencies {
     //TODO PickerView  条件选择器
     implementation rootProject.ext.GitHub.arouter
     kapt rootProject.ext.GitHub.arouterCompiler
+    // TODO  页面状态管理 https://github.com/KingJA/LoadSir
+    implementation rootProject.ext.GitHub.loadsir
 }

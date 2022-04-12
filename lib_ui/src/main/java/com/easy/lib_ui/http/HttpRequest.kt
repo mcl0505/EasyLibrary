@@ -109,21 +109,4 @@ object HttpRequest {
             .add(MyStandardJsonAdapters.FACTORY)
             .build()
     }
-
-
-
-    /**
-     * 同步的请求，当一个界面需要调用多个接口才能呈现出来时，可以在子线程中或者Observable.zip操作多个接口
-     */
-    @JvmStatic
-    fun <T> execute(call: Call<T>): T? {
-        try {
-            return call.execute().body()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        return null
-    }
-
 }

@@ -56,14 +56,16 @@ open class BaseViewModel() : ViewModel(), IViewModel{
     internal val mUiChangeLiveData by lazy { UiChangeLiveData() }
 
     //发起网络请求
-    fun launch( block: suspend () -> Unit){
+    fun launch( showDialog:Boolean = false,block: suspend () -> Unit){
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                if (showDialog)LiveDataBus.send(mUiChangeLiveData.showLoadingDialogEvent!!,"加载中")
                 block()
             } catch (e: Exception) {
                 error(e)
                 LogUtil.d(e.message)
             } finally {
+                if (showDialog)LiveDataBus.send(mUiChangeLiveData.dismissLoadingDialogEvent!!,"加载中")
             }
         }
     }

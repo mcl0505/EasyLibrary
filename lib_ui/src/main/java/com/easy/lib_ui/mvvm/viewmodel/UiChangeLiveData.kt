@@ -14,7 +14,7 @@ class UiChangeLiveData {
     var showLoadingDialogEvent: String? = null
     var dismissLoadingDialogEvent: String? = null
 
-    init {
+    fun initDialogEvent() {
         showLoadingDialogEvent = UUID.randomUUID().toString()
         dismissLoadingDialogEvent = UUID.randomUUID().toString()
     }

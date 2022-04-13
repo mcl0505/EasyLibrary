@@ -1,35 +1,21 @@
 package com.easy.lib_ui.fragment
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.collection.ArrayMap
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.easy.lib_ui.IView
 import com.easy.lib_ui.R
 import com.easy.lib_ui.TitleBar
 import com.easy.lib_ui.dialog.LoadingDialog
-import com.easy.lib_ui.mvvm.model.BaseModel
 import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
-import com.easy.lib_ui.ui.MultiStateView
-import com.easy.lib_util.LogUtil
-import com.easy.lib_util.Utils
-import com.easy.lib_util.bus.LiveDataBus
-import com.easy.lib_util.executor.AppExecutorsHelper
 import com.easy.lib_util.ext.visibleOrGone
-import com.easy.lib_util.receiver.NetStateReceiver
-import com.imyyq.mvvm.base.IActivityResult
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -48,7 +34,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel>(
     protected lateinit var mTitlebar: TitleBar
     //内容
     private lateinit var mViewContent: FrameLayout
-    //当前页面展示布局状态
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -80,6 +65,7 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel>(
         mTitlebar = mView.findViewById(R.id.titleBar)
         mViewContent = mView.findViewById(R.id.frame_content)
         mBinding = initBinding(layoutInflater, null)
+        mViewContent.addView(mBinding.root)
         mTitlebar.apply {
             visibleOrGone(!setTitleText().isNullOrEmpty())
             tvTitleCenter.text = setTitleText()
@@ -115,21 +101,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel>(
 
     @CallSuper
     override fun initUiChangeLiveData() {
-        //网络状态监听
-//        LiveDataBus.observe<NetStateReceiver.NetState>(this, "NetStateReceiver", {
-//            LogUtil.d("NetStateReceiver.NetState=${it}")
-//            when (it) {
-//                NetStateReceiver.NetState.CONNECT_NO -> {
-//                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
-//                }
-//                else -> {
-//                    initMultiStateView(MultiStateView.STATE_LOADING)
-//                    AppExecutorsHelper.postDelayed({
-//                        initMultiStateView(MultiStateView.STATE_SUCCESS)
-//                    })
-//                }
-//            }
-//        })
     }
 
 

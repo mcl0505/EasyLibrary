@@ -13,7 +13,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.easy.lib_util.app.EasyApplication
 import com.easy.lib_ui.IView
@@ -21,21 +20,15 @@ import com.easy.lib_ui.R
 import com.easy.lib_ui.TitleBar
 import com.easy.lib_ui.dialog.LoadingDialog
 import com.easy.lib_ui.mvvm.TokenInvalidLiveData
-import com.easy.lib_ui.mvvm.model.BaseModel
 import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
-import com.easy.lib_ui.ui.MultiStateView
-import com.easy.lib_util.Utils
 import com.easy.lib_util.app.AppManager
 import com.easy.lib_util.bar.StatusBarUtils
-import com.easy.lib_util.executor.AppExecutorsHelper
 import com.easy.lib_util.ext.observe
 import com.easy.lib_util.ext.singleClick
 import com.easy.lib_util.ext.visibleOrGone
 import com.easy.lib_util.ext.yes
 import com.easy.lib_util.soft.SoftInputModelUtil
 import com.easy.lib_util.toast.toast
-import com.imyyq.mvvm.base.IActivityResult
-import com.imyyq.mvvm.base.IArgumentsFromIntent
 import com.easy.lib_util.receiver.NetStateReceiver
 
 import android.net.ConnectivityManager
@@ -61,13 +54,10 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
     protected lateinit var mBinding: V
     protected lateinit var mViewModel: VM
     protected lateinit var mViewContent: FrameLayout
-
     //标题
     protected lateinit var mTitlebar: TitleBar
 
     private lateinit var mLoadingDialog: LoadingDialog
-
-    private lateinit var mStateReceiver: NetStateReceiver
 
     //true=黑色  false=白色
     open val isDark get() = false
@@ -90,6 +80,8 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
         onLayoutBefore()
         setContentView(R.layout.activity_root)
         mBinding = initBinding(layoutInflater, null)
+        mViewContent = findViewById(R.id.frame_content)
+        mViewContent.addView(mBinding.root)
         //初始化ViewModel
         initViewAndViewModel()
         //初始化参数
@@ -112,15 +104,12 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
 
     private fun initTitle() {
         mTitlebar = findViewById(R.id.titleBar)
-        mViewContent = findViewById(R.id.frame_content)
         mTitlebar.apply {
             titleLine.visibleOrGone(false)
             visibleOrGone(!setTitleText().isNullOrEmpty())
             tvTitleCenter.text = setTitleText()
             imgTitleLeft.singleClick { finish() }
         }
-        //动态注册网络状态广播  跟随随Activity生命周期
-//        registerReceiver()
     }
 
     /**
@@ -133,6 +122,7 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
         mViewModel = initViewModel(this)
         // 让 vm 可以感知 v 的生命周期
         lifecycle.addObserver(mViewModel)
+        mViewModel.mUiChangeLiveData.initDialogEvent()
 
         mLoadingDialog.onCancelLoadingDialog = {
             mViewModel.cancelConsumingTask()
@@ -164,21 +154,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
                 }
             }
         })
-        //网络状态监听
-//        LiveDataBus.observe<NetStateReceiver.NetState>(this,"NetStateReceiver",{
-//            LogUtil.d("NetStateReceiver.NetState=${it}")
-//            when(it){
-//                NetStateReceiver.NetState.CONNECT_NO -> {
-//                    initMultiStateView(MultiStateView.STATE_NET_ERROR)
-//                }
-//                else -> {
-//                    initMultiStateView(MultiStateView.STATE_LOADING)
-//                    AppExecutorsHelper.postDelayed({
-//                        initMultiStateView(MultiStateView.STATE_SUCCESS)
-//                    })
-//                }
-//            }
-//        })
 
     }
 
@@ -186,7 +161,10 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
     override fun initUiChangeLiveData() {
         //显示操作等待框
         LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.showLoadingDialogEvent!!,{
-            mLoadingDialog.showDialog(false,it)
+            if (mLoadingDialog == null){
+                mLoadingDialog = LoadingDialog(this,false)
+            }
+            mLoadingDialog.showDialog(false)
         })
         //隐藏操作等待框
         LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.dismissLoadingDialogEvent!!,{
@@ -205,8 +183,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
         if (this::mViewModel.isInitialized) {
             lifecycle.removeObserver(mViewModel)
         }
-        //移除网络状态监听广播
-        unregisterReceiver(mStateReceiver)
 
         removeLiveDataBus(this)
     }
@@ -274,10 +250,5 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
         return super.onKeyDown(keyCode, event)
     }
 
-    private fun registerReceiver() {
-        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        mStateReceiver = NetStateReceiver()
-        registerReceiver(mStateReceiver, filter)
-    }
 
 }

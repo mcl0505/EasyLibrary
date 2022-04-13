@@ -3,6 +3,7 @@ package com.easy.lib_util.app
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.kingja.loadsir.core.LoadSir
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,6 +25,8 @@ abstract class EasyApplication : MultiDexApplication() , AppImp {
             initOtherSDK()
             //收集异常信息  保存到手机中方便查看
             CrashHandlerUtil.init()
+
+
         }
     }
 

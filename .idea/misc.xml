@@ -27,7 +27,25 @@
         <entry key="..\:/Android/library/EasyLibrary/lib_util/src/main/res/drawable/utils_image_placehoder.xml" value="0.3611111111111111" />
         <entry key="..\:/Android/library/EasyLibrary/module_login/src/main/res/layout/activity_login.xml" value="0.2821557971014493" />
         <entry key="..\:/project/mcl/EasyLibrary/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/activity_root.xml" value="0.24094202898550723" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/activity_root_refresh.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/base_multi_state_empty.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/base_multi_state_loading.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/base_multi_state_neterror.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/base_multi_state_unknow.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/dialog_select_img.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/dialog_update_app.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/item_add_img_content.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/item_add_img_footer.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/layout_loading_view.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/layout_title_bar.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/loading_callback.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/tablayout_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/view_error.xml" value="0.36614583333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/view_no_data.xml" value="0.36614583333333334" />
         <entry key="..\:/project/mcl/EasyLibrary/lib_util/src/main/res/drawable/utils_image_placehoder.xml" value="0.36666666666666664" />
+        <entry key="..\:/project/mcl/EasyLibrary/module_login/src/main/res/layout/activity_login.xml" value="0.17806484295845998" />
+        <entry key="..\:/project/mcl/EasyLibrary/module_login/src/main/res/layout/activity_test.xml" value="0.1" />
       </map>
     </option>
   </component>

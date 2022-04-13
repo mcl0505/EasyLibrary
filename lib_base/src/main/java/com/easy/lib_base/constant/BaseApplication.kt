@@ -3,10 +3,15 @@ package com.easy.lib_base.constant
 import com.alibaba.android.arouter.launcher.ARouter
 import com.easy.lib_base.BuildConfig
 import com.easy.lib_ui.http.HttpRequest
+import com.easy.lib_ui.loadsir.EmptyCallback
+import com.easy.lib_ui.loadsir.ErrorCallback
+import com.easy.lib_ui.loadsir.LoadingCallback
 import com.easy.lib_ui.update.UpdateAppUtils
 import com.easy.lib_util.app.EasyApplication
 import com.easy.lib_util.store.MmkvUtil
 import com.easy.lib_util.tool.SignTool
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 
 /**
  *   公司名称: ~漫漫人生路~总得错几步~
@@ -25,6 +30,17 @@ open abstract class BaseApplication : EasyApplication() {
         UpdateAppUtils.init(this)
         //初始化本地信息缓存
         MmkvUtil.init(this)
+        //初始化页面状态管理
+        initLoad()
+    }
+
+    private fun initLoad(){
+        LoadSir.beginBuilder()
+            .addCallback(LoadingCallback())
+            .addCallback(ErrorCallback())
+            .addCallback(EmptyCallback())
+            .setDefaultCallback(SuccessCallback::class.java)
+            .commit()
     }
 
     /**

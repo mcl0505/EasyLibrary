@@ -22,7 +22,7 @@ abstract class BaseNoViewModelActivity<V : ViewBinding>(
     @LayoutRes
     private val layoutId: Int,
 ) :
-    EasyActivity<V, BaseViewModel<BaseModel>>() {
+    EasyActivity<V, BaseViewModel>() {
     @SuppressLint("MissingSuperCall")
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): V =
@@ -39,7 +39,7 @@ abstract class BaseNoViewModelActivity<V : ViewBinding>(
     }
 
 
-    final override fun initViewModel(viewModelStoreOwner: ViewModelStoreOwner): BaseViewModel<BaseModel> {
+    final override fun initViewModel(viewModelStoreOwner: ViewModelStoreOwner): BaseViewModel {
         return super.initViewModel(viewModelStoreOwner)
     }
 

@@ -15,7 +15,7 @@ import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
 import com.easy.lib_util.ext.visibleOrGone
 import com.kckj.baselibrary.ext.bindingInflate
 
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<out BaseModel>>(
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes private val layoutId: Int,
     private val varViewModelId: Int? = null,
     sharedViewModel: Boolean = false

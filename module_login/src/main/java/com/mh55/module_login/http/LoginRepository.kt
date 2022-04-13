@@ -14,8 +14,8 @@ import com.easy.lib_ui.mvvm.model.BaseModel
  */
 class LoginRepository :  BaseModel()  {
     private val api = HttpRequest.getService(LoginService::class.java)
-    suspend fun login(login:StateLiveData<String>){
-        executeReqWithFlow({api.login()},login)
+    suspend fun login(userName: String, password: String,login:StateLiveData<String>){
+        executeReqWithFlow({api.login(userName,password)},login)
     }
 
 }

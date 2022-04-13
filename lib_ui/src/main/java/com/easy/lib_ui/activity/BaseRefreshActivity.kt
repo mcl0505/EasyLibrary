@@ -31,7 +31,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @param layout 布局文件
  * @param id 布局中对应的viewModel id
  */
-open abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewModel<out BaseModel>,IDB:ViewDataBinding,T>(
+open abstract class BaseRefreshActivity<VDB : ViewDataBinding, BRVM : BaseViewModel,IDB:ViewDataBinding,T>(
     val layout: Int,
     val itemLayout: Int,
     val id: Int

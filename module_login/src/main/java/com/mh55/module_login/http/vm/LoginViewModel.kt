@@ -14,6 +14,6 @@ class LoginViewModel : BaseViewModel() {
     private val mRepository by lazy { LoginRepository() }
     var mLogin = StateLiveData<String>()
     fun login(){
-        launch{mRepository.login(mLogin)}
+        launch{mRepository.login("18302696784","123456",mLogin)}
     }
 }

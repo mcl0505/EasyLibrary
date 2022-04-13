@@ -23,8 +23,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
 
     override fun initViewObservable() {
         super.initViewObservable()
-        mViewModel.mLogin.observe(this,object : IStateObserver<String>(){
+        mViewModel.mLogin.observe(this,object : IStateObserver<String>(mViewContent){
             override fun onDataChange(data: String?) {
+
             }
         })
     }

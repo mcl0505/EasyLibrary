@@ -18,7 +18,7 @@ import com.easy.lib_util.ext.yes
 import com.easy.lib_util.toast.toast
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
-abstract class BaseRefreshFragment <VDB : ViewDataBinding, BRVM : BaseViewModel<out BaseModel>,IDB: ViewDataBinding,T>(
+abstract class BaseRefreshFragment <VDB : ViewDataBinding, BRVM : BaseViewModel,IDB: ViewDataBinding,T>(
     val layout: Int,
     val itemLayout: Int,
     val brId: Int

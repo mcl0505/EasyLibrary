@@ -15,7 +15,7 @@ abstract class BaseNoViewModelFragment<V : ViewBinding>(
     @LayoutRes
     private val layoutId: Int,
 ) :
-    EasyFragment<V, BaseViewModel<BaseModel>>()  {
+    EasyFragment<V, BaseViewModel>()  {
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): V = bindingInflate(inflater,layoutId,container)
 
@@ -28,7 +28,7 @@ abstract class BaseNoViewModelFragment<V : ViewBinding>(
     }
 
 
-    final override fun initViewModel(viewModelStoreOwner: ViewModelStoreOwner): BaseViewModel<BaseModel> {
+    final override fun initViewModel(viewModelStoreOwner: ViewModelStoreOwner): BaseViewModel {
         return super.initViewModel(viewModelStoreOwner)
     }
 }

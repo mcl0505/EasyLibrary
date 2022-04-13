@@ -1,6 +1,7 @@
 package com.mh55.module_login.http
 
 import com.easy.lib_ui.http.BaseResult
+import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -43,6 +44,7 @@ import retrofit2.http.POST
  *
  */
 interface LoginService {
-    @POST("")
-    suspend fun login():BaseResult<String>
+    @FormUrlEncoded
+    @POST("user/login")
+    suspend fun login(@Field("username") username: String, @Field("password") password: String):BaseResult<String>
 }

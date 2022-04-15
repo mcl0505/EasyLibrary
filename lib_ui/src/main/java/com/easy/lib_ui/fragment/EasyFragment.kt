@@ -93,9 +93,6 @@ abstract class EasyFragment<V : ViewBinding, VM : BaseViewModel>(
         // 让 vm 可以感知 v 的生命周期
         lifecycle.addObserver(mViewModel)
 
-        mLoadingDialog.onCancelLoadingDialog = {
-            mViewModel.cancelConsumingTask()
-        }
     }
 
 

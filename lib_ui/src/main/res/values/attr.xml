@@ -164,14 +164,4 @@
         <attr name="mrl_height_percent" format="float"/>
     </declare-styleable>
 
-    <!--这是多类型页面-->
-    <declare-styleable name="MultiStateView">
-        <attr name="msv_loadingView" format="reference" />
-        <attr name="msv_successView" format="reference" />
-        <attr name="msv_unknownView" format="reference" />
-        <attr name="msv_netErrorView" format="reference" />
-        <attr name="msv_emptyView" format="reference" />
-        <attr name="msv_emptyViewImage" format="reference" />
-        <attr name="msv_emptyViewText" format="reference|string" />
-    </declare-styleable>
 </resources>

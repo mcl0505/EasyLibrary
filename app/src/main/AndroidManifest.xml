@@ -12,14 +12,10 @@
     <!--适配Android R包可见性 开始-->
     <queries package="com.hhqc.easylibrary">
         <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE">
-
-            </action>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
         </intent>
         <intent>
-            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE">
-
-            </action>
+            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE"/>
         </intent>
     </queries>
     <!--适配Android R包可见性 结束-->

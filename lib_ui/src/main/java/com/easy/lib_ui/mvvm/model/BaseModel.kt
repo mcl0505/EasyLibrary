@@ -3,9 +3,9 @@ package com.easy.lib_ui.mvvm.model
 import com.alibaba.fastjson.JSON
 import com.easy.lib_ui.http.BaseResult
 import com.easy.lib_ui.http.DataState
-import com.easy.lib_ui.mvvm.SingleLiveEvent
 import com.easy.lib_ui.mvvm.StateLiveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -43,7 +43,7 @@ abstract class BaseModel : IModel {
         flow {
             val respResult = block.invoke()
             result = respResult
-            result.dataState = DataState.STATE_SUCCESS
+            result.dataState = DataState.STATE_LOADING
             stateLiveData?.postValue(result)
             emit(respResult)
         }
@@ -59,7 +59,7 @@ abstract class BaseModel : IModel {
             .catch { exception ->
                 run {
                     exception.printStackTrace()
-                    result.dataState = DataState.STATE_ERROR
+                    result.dataState = DataState.STATE_LOADING
                     result.error = exception
                     stateLiveData?.postValue(result)
                 }

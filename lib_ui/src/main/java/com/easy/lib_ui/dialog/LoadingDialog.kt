@@ -1,7 +1,10 @@
 package com.easy.lib_ui.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import com.easy.lib_ui.R
@@ -9,44 +12,51 @@ import com.easy.lib_util.app.AppManager
 
 class LoadingDialog : Dialog {
 
+
     private var loadingDialog: LoadingDialog? = null
 
     constructor(context: Context, canNotCancel: Boolean) : super(
         context,
         R.style.LoadingDialog
     ) {
+
         setContentView(R.layout.layout_loading_view)
+
+//        val animation: Animation = RotateAnimation(
+//            0f,
+//            360f,
+//            Animation.RELATIVE_TO_SELF,
+//            0.5f,
+//            Animation.RELATIVE_TO_SELF,
+//            0.5f
+//        )
+//
+//        animation.duration = 2000
+//        animation.repeatCount = 10
+//        animation.fillAfter = true
+//        imageView.startAnimation(animation)
+
     }
 
-    /**
-     * @param isCancel 是否能够外部取消弹框  true=正常取消弹框  false=取消弹框的同时取消ViewModel中的网络请求事件
-     * @param msg 弹框提示信息
-     */
-    fun showDialog(isCancel: Boolean = false,msg:String = "加载中") {
+    fun showDialog(context: Context, isCancel: Boolean) {
+        if (context is Activity) {
+            if (context.isFinishing) {
+                return
+            }
+        }
 
         if (loadingDialog == null) {
-            loadingDialog = LoadingDialog(AppManager.getContext(), isCancel)
+            loadingDialog = LoadingDialog(context, isCancel)
+
         }
 
-        if (!isCancel){
-            loadingDialog?.setOnCancelListener { onCancelLoadingDialog() }
-        }
-
-        loadingDialog?.findViewById<TextView>(R.id.message)?.text = msg
-        loadingDialog?.findViewById<LottieAnimationView>(R.id.loadingView)?.playAnimation()
-
+       findViewById<LottieAnimationView>(R.id.loadingView).playAnimation()
         loadingDialog?.show()
     }
 
-
     fun dismissDialog() {
-        loadingDialog?.findViewById<LottieAnimationView>(R.id.loadingView)?.cancelAnimation()
+        findViewById<LottieAnimationView>(R.id.loadingView).cancelAnimation()
         loadingDialog?.dismiss()
     }
-
-    /**
-     * 加载中对话框被用户手动取消了，则回调此方法
-     */
-    lateinit var onCancelLoadingDialog:()->Unit
 
 }

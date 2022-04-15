@@ -13,6 +13,7 @@ import com.kingja.loadsir.core.Convertor
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.easy.lib_ui.loadsir.LoadingCallback
+import kotlinx.coroutines.delay
 import org.json.JSONException
 import retrofit2.HttpException
 import java.io.InterruptedIOException

@@ -4,9 +4,11 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.easy.lib_base.constant.ARouterPath
+import com.easy.lib_ui.activity.BaseActivity
 import com.easy.lib_ui.activity.BaseNoViewModelActivity
 import com.easy.lib_ui.adapter.BaseDataBindAdapter
 import com.easy.lib_ui.dialog.image.SelectImageDialog
+import com.easy.lib_ui.mvvm.viewmodel.BaseViewModel
 import com.easy.lib_util.bus.LiveDataBus
 import com.easy.lib_util.dsl.text.renderString
 import com.easy.lib_util.dsl.view.renderDrawable
@@ -25,7 +27,7 @@ import com.hhqc.easylibrary.databinding.ItemMainBinding
  *   功能描述: 主页
  */
 
-class MainActivity : BaseNoViewModelActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(R.layout.activity_main) {
     var number = 0
     private val mAdapter by lazy { MainAdapter() }
 

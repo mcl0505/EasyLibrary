@@ -14,7 +14,7 @@ import com.kckj.baselibrary.ext.bindingInflate
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes
     private val layoutId: Int,
-    private val varViewModelId: Int,
+    private val varViewModelId: Int?=null,
 ) : EasyActivity<V, VM>() {
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): V =

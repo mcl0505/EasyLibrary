@@ -1,6 +1,5 @@
 package com.easy.lib_ui.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -9,8 +8,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -29,13 +26,7 @@ import com.easy.lib_util.ext.visibleOrGone
 import com.easy.lib_util.ext.yes
 import com.easy.lib_util.soft.SoftInputModelUtil
 import com.easy.lib_util.toast.toast
-import com.easy.lib_util.receiver.NetStateReceiver
-
-import android.net.ConnectivityManager
-
-import android.content.IntentFilter
 import android.widget.FrameLayout
-import com.easy.lib_util.LogUtil
 import com.easy.lib_util.bus.LiveDataBus
 
 
@@ -122,11 +113,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
         mViewModel = initViewModel(this)
         // 让 vm 可以感知 v 的生命周期
         lifecycle.addObserver(mViewModel)
-        mViewModel.mUiChangeLiveData.initDialogEvent()
-
-        mLoadingDialog.onCancelLoadingDialog = {
-            mViewModel.cancelConsumingTask()
-        }
 
     }
 
@@ -159,19 +145,6 @@ abstract class EasyActivity<V : ViewBinding, VM : BaseViewModel> :
 
     @CallSuper
     override fun initUiChangeLiveData() {
-        //显示操作等待框
-        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.showLoadingDialogEvent!!,{
-            if (mLoadingDialog == null){
-                mLoadingDialog = LoadingDialog(this,false)
-            }
-            mLoadingDialog.showDialog(false)
-        })
-        //隐藏操作等待框
-        LiveDataBus.observe<String>(this,mViewModel.mUiChangeLiveData.dismissLoadingDialogEvent!!,{
-            mLoadingDialog.dismissDialog()
-        })
-
-
     }
 
     protected var time: Long = 0

@@ -39,7 +39,7 @@ open abstract class BaseApplication : EasyApplication() {
             .addCallback(LoadingCallback())
             .addCallback(ErrorCallback())
             .addCallback(EmptyCallback())
-            .setDefaultCallback(SuccessCallback::class.java)
+            .setDefaultCallback(LoadingCallback::class.java)
             .commit()
     }
 

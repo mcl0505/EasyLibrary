@@ -1,0 +1,59 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // TODO 微信支付
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    // TODO 支付宝支付
+    implementation 'com.alipay.sdk:alipaysdk-android:+@aar'
+    // TODO 支付宝分享  目前没有遇到使用该功能需求，先暂时不写了
+    implementation files('libs\\libapshare.jar')
+    // TODO QQ
+    implementation 'com.tencent.tauth:qqopensdk:3.52.0'
+    // TODO sina 新浪微博   https://github.com/sinaweibosdk/weibo_android_sdk/blob/master/2019SDK/%E6%96%87%E6%A1%A3/%E5%BE%AE%E5%8D%9AAndroid%20SDK%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97_v11.11.1.pdf
+    implementation 'io.github.sinaweibosdk:core:12.5.0@aar'
+    // TODO 数据解析
+    implementation 'com.alibaba:fastjson:1.2.58'
+    // TODO 网络请求  微信登录的时候请求使用
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+}

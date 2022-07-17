@@ -27,6 +27,9 @@
         <entry key="..\:/Android/library/EasyLibrary/lib_util/src/main/res/drawable/utils_image_placehoder.xml" value="0.3611111111111111" />
         <entry key="..\:/Android/library/EasyLibrary/module_login/src/main/res/layout/activity_login.xml" value="0.2821557971014493" />
         <entry key="..\:/project/mcl/EasyLibrary/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
+        <entry key="..\:/project/mcl/EasyLibrary/app/src/main/res/layout/anim_buttons.xml" value="0.25833333333333336" />
+        <entry key="..\:/project/mcl/EasyLibrary/app/src/main/res/layout/custom_dialog_layout.xml" value="0.35052083333333334" />
+        <entry key="..\:/project/mcl/EasyLibrary/app/src/main/res/layout/permissions_item.xml" value="0.25833333333333336" />
         <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/activity_root.xml" value="0.24094202898550723" />
         <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/activity_root_refresh.xml" value="0.36614583333333334" />
         <entry key="..\:/project/mcl/EasyLibrary/lib_ui/src/main/res/layout/base_multi_state_empty.xml" value="0.36614583333333334" />

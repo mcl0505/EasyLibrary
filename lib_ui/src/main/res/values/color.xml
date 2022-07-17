@@ -3,55 +3,57 @@
     <color name="colorPrimary">#07C160</color>
     <color name="colorPrimaryDark">#303F9F</color>
 
+<!--  透明  -->
     <color name="color_transparent">#00000000</color>
-
-    <!--  APP 主题色  -->
-    <color name="app_color">#2196F3</color>
-    <color name="app_color_10">#102196F3</color>
-    <color name="app_color_20">#202196F3</color>
-    <color name="app_color_30">#302196F3</color>
-    <color name="app_color_40">#402196F3</color>
-    <color name="app_color_50">#502196F3</color>
-    <color name="app_color_60">#602196F3</color>
-    <color name="app_color_70">#702196F3</color>
-    <color name="app_color_80">#802196F3</color>
-    <color name="app_color_90">#902196F3</color>
     <!--  系统背景色  -->
     <color name="app_system_color">#F4F4F4</color>
+
+    <!--  APP 主题色  -->
+    <color name="app_color">#FF7A0F</color>
+    <color name="app_color_10">#19FF7A0F</color>
+    <color name="app_color_20">#33FF7A0F</color>
+    <color name="app_color_30">#4CFF7A0F</color>
+    <color name="app_color_40">#66FF7A0F</color>
+    <color name="app_color_50">#7FFF7A0F</color>
+    <color name="app_color_60">#99FF7A0F</color>
+    <color name="app_color_70">#B2FF7A0F</color>
+    <color name="app_color_80">#CCFF7A0F</color>
+    <color name="app_color_90">#E5FF7A0F</color>
+
     <!--  白色  -->
     <color name="white">#ffffff</color>
-    <color name="white_10">#ffffff</color>
-    <color name="white_20">#20ffffff</color>
-    <color name="white_30">#30ffffff</color>
-    <color name="white_40">#40ffffff</color>
-    <color name="white_50">#50ffffff</color>
-    <color name="white_60">#60ffffff</color>
-    <color name="white_70">#70ffffff</color>
-    <color name="white_80">#80ffffff</color>
-    <color name="white_90">#90ffffff</color>
+    <color name="white_10">#19ffffff</color>
+    <color name="white_20">#33ffffff</color>
+    <color name="white_30">#4Cffffff</color>
+    <color name="white_40">#66ffffff</color>
+    <color name="white_50">#7Fffffff</color>
+    <color name="white_60">#99ffffff</color>
+    <color name="white_70">#B2ffffff</color>
+    <color name="white_80">#CCffffff</color>
+    <color name="white_90">#E5ffffff</color>
     <!--  黑色  -->
     <color name="black">#000000</color>
-    <color name="black_10">#10000000</color>
-    <color name="black_20">#20000000</color>
-    <color name="black_30">#30000000</color>
-    <color name="black_40">#40000000</color>
-    <color name="black_50">#50000000</color>
-    <color name="black_60">#60000000</color>
-    <color name="black_70">#70000000</color>
-    <color name="black_80">#80000000</color>
-    <color name="black_90">#90000000</color>
+    <color name="black_10">#19000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_30">#4C000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_50">#7F000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_70">#B2000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_90">#E5000000</color>
 
     <color name="color_666">#666666</color>
     <color name="color_606060">#606060</color>
-    <color name="color_666_10">#10666666</color>
-    <color name="color_666_20">#20666666</color>
-    <color name="color_666_30">#30666666</color>
-    <color name="color_666_40">#40666666</color>
-    <color name="color_666_50">#50666666</color>
-    <color name="color_666_60">#60666666</color>
-    <color name="color_666_70">#70666666</color>
-    <color name="color_666_80">#80666666</color>
-    <color name="color_666_90">#90666666</color>
+    <color name="color_666_10">#19666666</color>
+    <color name="color_666_20">#33666666</color>
+    <color name="color_666_30">#4C666666</color>
+    <color name="color_666_40">#66666666</color>
+    <color name="color_666_50">#7F666666</color>
+    <color name="color_666_60">#99666666</color>
+    <color name="color_666_70">#B2666666</color>
+    <color name="color_666_80">#CC666666</color>
+    <color name="color_666_90">#E5666666</color>
 
 
     <color name="color_ccc">#CCCCCC</color>
